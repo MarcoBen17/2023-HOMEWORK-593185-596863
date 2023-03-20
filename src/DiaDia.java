@@ -25,7 +25,7 @@ public class DiaDia {
 			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
-	
+
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
 
 	private Partita partita;
@@ -54,7 +54,11 @@ public class DiaDia {
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
 
-		if (comandoDaEseguire.getNome().equals("fine")) {
+		if (comandoDaEseguire.getNome()== null) {
+			
+			System.out.println("Comando sconosciuto");
+		}
+		else if (comandoDaEseguire.getNome().equals("fine")) {
 			this.fine(); 
 			return true;
 		} else if (comandoDaEseguire.getNome().equals("vai"))

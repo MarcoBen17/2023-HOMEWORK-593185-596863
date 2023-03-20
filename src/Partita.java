@@ -17,7 +17,6 @@ public class Partita {
 	private Stanza stanzaVincente;
 	private boolean finita;
 	private int cfu;
-	private int caino;
 	
 	public Partita(){
 		creaStanze();
