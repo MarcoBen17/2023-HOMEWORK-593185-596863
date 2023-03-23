@@ -59,7 +59,6 @@ public class DiaDia {
 
 		String nomeComando = comandoDaEseguire.getNome();
 		if (nomeComando== null) {
-
 			System.out.println("Comando sconosciuto");
 		}
 		else if (nomeComando.equals("fine")) {
@@ -72,10 +71,10 @@ public class DiaDia {
 		else if (nomeComando.equals("aiuto"))
 			this.aiuto();
 
-		else if (nomeComando.equals("prendi"))
+		else if (nomeComando.equals("prendi") && comandoDaEseguire.getParametro()!= null)
 			this.prendi(comandoDaEseguire.getParametro());
 		
-		else if (nomeComando.equals("posa"))
+		else if (nomeComando.equals("posa") && comandoDaEseguire.getParametro()!= null)
 			this.posa(comandoDaEseguire.getParametro());
 		
 		else
@@ -125,6 +124,7 @@ public class DiaDia {
 	}
 
 	public void prendi(String nomeAttrezzo) {
+		
 		Borsa borsa = this.partita.getGiocatore().getBorsa();
 		Stanza stanzaCorrente = this.partita.getStanzaCorrente();
 
