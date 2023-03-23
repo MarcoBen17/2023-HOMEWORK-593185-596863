@@ -1,5 +1,6 @@
-
-
+package it.uniroma3.diadia;
+import it.uniroma3.diadia.ambienti.*;
+import it.uniroma3.diadia.giocatore.*;
 
 /**
  * Questa classe modella una partita del gioco
@@ -12,17 +13,27 @@
 public class Partita {
 
 	static final private int CFU_INIZIALI = 20;
-	
+
 	private Stanza stanzaCorrente;
 	private Labirinto labirinto;
 	private boolean finita;
 	private int cfu;
-	
+	private Giocatore giocatore;
+
+	public Giocatore getGiocatore() {
+		return giocatore;
+	}
+
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore = giocatore;
+	}
+
 	public Partita(){
 		this.labirinto= new Labirinto();
 		this.stanzaCorrente= labirinto.getEntrata();
 		this.finita = false;
 		this.cfu = CFU_INIZIALI;
+		this.giocatore= new Giocatore();
 	}
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
