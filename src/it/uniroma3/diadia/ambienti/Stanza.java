@@ -175,7 +175,6 @@ public class Stanza {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
