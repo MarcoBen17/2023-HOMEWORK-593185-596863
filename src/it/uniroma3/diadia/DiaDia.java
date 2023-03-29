@@ -32,6 +32,7 @@ public class DiaDia {
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	private Partita partita;
+	private IOConsole IOConsole;
 
 	public DiaDia() {
 		this.partita = new Partita();
@@ -110,8 +111,9 @@ public class DiaDia {
 			System.out.println("Direzione inesistente");
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getCfu();
-			this.partita.setCfu(cfu--);
+			Giocatore giocatore = this.partita.getGiocatore();
+			int cfu = giocatore.getCfu();
+			giocatore.setCfu(cfu--);
 		}
 		System.out.println(partita.getStanzaCorrente().getDescrizione());
 	}
@@ -132,6 +134,7 @@ public class DiaDia {
 			Attrezzo item= stanzaCorrente.getAttrezzo(nomeAttrezzo);
 			stanzaCorrente.removeAttrezzo(item);
 			borsa.addAttrezzo(item);
+			System.out.println("attrezzo raccolto");
 		}
 		else if (borsa.getPeso() >= borsa.getPesoMax() && !stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
 			System.out.println("Borsa piena e Attrezzo non presente nella stanza");
@@ -151,6 +154,7 @@ public class DiaDia {
 		if (borsa.hasAttrezzo(nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()< Stanza.getNumeroMassimoAttrezzi()) {
 			Attrezzo item= borsa.removeAttrezzo(nomeAttrezzo);
 			stanzaCorrente.addAttrezzo(item);
+			System.out.println("attrezzo posato");
 		}
 		else if (!borsa.hasAttrezzo(nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()>= Stanza.getNumeroMassimoAttrezzi())
 			System.out.println("Attrezzo non presente in borsa e stanza piena");
@@ -162,6 +166,8 @@ public class DiaDia {
 			System.out.println("stanza piena");
 	}
 
+	
+	
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();
