@@ -36,13 +36,14 @@ public class DiaDia {
 
 	public DiaDia() {
 		this.partita = new Partita();
+		this.IOConsole= new IOConsole();
 	}
 
 	public void gioca() {
 		String istruzione; 
 		Scanner scannerDiLinee;   //prende una righa e ci fa una scansione (esempio comando "vai sud")
 
-		System.out.println(MESSAGGIO_BENVENUTO);
+		IOConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		scannerDiLinee = new Scanner(System.in);		
 		do		
 			istruzione = scannerDiLinee.nextLine();
@@ -60,7 +61,7 @@ public class DiaDia {
 
 		String nomeComando = comandoDaEseguire.getNome();
 		if (nomeComando== null) {
-			System.out.println("Comando sconosciuto");
+			IOConsole.mostraMessaggio("Comando sconosciuto");
 		}
 		else if (nomeComando.equals("fine")) {
 			this.fine(); 
@@ -79,9 +80,9 @@ public class DiaDia {
 			this.posa(comandoDaEseguire.getParametro());
 		
 		else
-			System.out.println("Comando sconosciuto");
+			IOConsole.mostraMessaggio("Comando sconosciuto");
 		if (this.partita.vinta()) {
-			System.out.println("Hai vinto!");
+			IOConsole.mostraMessaggio("Hai vinto!");
 			return true;
 		} else
 			return false;
@@ -94,8 +95,8 @@ public class DiaDia {
 	 */
 	private void aiuto() {
 		for(int i=0; i< elencoComandi.length; i++) 
-			System.out.print(elencoComandi[i]+" ");
-		System.out.println();
+			IOConsole.mostraMessaggio(elencoComandi[i]+" ");
+		IOConsole.mostraMessaggio("------");
 	}
 
 	/**
@@ -104,25 +105,25 @@ public class DiaDia {
 	 */
 	private void vai(String direzione) {
 		if(direzione==null)
-			System.out.println("Dove vuoi andare ?");
+			IOConsole.mostraMessaggio("Dove vuoi andare ?");
 		Stanza prossimaStanza = null;
 		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
-			System.out.println("Direzione inesistente");
+			IOConsole.mostraMessaggio("Direzione inesistente");
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
 			Giocatore giocatore = this.partita.getGiocatore();
 			int cfu = giocatore.getCfu();
 			giocatore.setCfu(cfu--);
 		}
-		System.out.println(partita.getStanzaCorrente().getDescrizione());
+		IOConsole.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 	}
 
 	/**
 	 * Comando "Fine".
 	 */
 	private void fine() {
-		System.out.println("Grazie di aver giocato!");  // si desidera smettere
+		IOConsole.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
 	}
 
 	public void prendi(String nomeAttrezzo) {
@@ -134,16 +135,16 @@ public class DiaDia {
 			Attrezzo item= stanzaCorrente.getAttrezzo(nomeAttrezzo);
 			stanzaCorrente.removeAttrezzo(item);
 			borsa.addAttrezzo(item);
-			System.out.println("attrezzo raccolto");
+			IOConsole.mostraMessaggio("attrezzo raccolto");
 		}
 		else if (borsa.getPeso() >= borsa.getPesoMax() && !stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
-			System.out.println("Borsa piena e Attrezzo non presente nella stanza");
+			IOConsole.mostraMessaggio("Borsa piena e Attrezzo non presente nella stanza");
 		}
 		else if (borsa.getPeso() >= borsa.getPesoMax()) {
-			System.out.println("Borsa piena");
+			IOConsole.mostraMessaggio("Borsa piena");
 		}
 		else if (!stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
-			System.out.println("Attrezzo non presente nella stanza");
+			IOConsole.mostraMessaggio("Attrezzo non presente nella stanza");
 		}
 	}
 
@@ -154,16 +155,16 @@ public class DiaDia {
 		if (borsa.hasAttrezzo(nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()< Stanza.getNumeroMassimoAttrezzi()) {
 			Attrezzo item= borsa.removeAttrezzo(nomeAttrezzo);
 			stanzaCorrente.addAttrezzo(item);
-			System.out.println("attrezzo posato");
+			IOConsole.mostraMessaggio("attrezzo posato");
 		}
 		else if (!borsa.hasAttrezzo(nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()>= Stanza.getNumeroMassimoAttrezzi())
-			System.out.println("Attrezzo non presente in borsa e stanza piena");
+			IOConsole.mostraMessaggio("Attrezzo non presente in borsa e stanza piena");
 
 		else if (!borsa.hasAttrezzo(nomeAttrezzo))
-			System.out.println("Attrezzo non presente in borsa");
+			IOConsole.mostraMessaggio("Attrezzo non presente in borsa");
 
 		else if (stanzaCorrente.getNumeroAttrezzi() >= Stanza.getNumeroMassimoAttrezzi())
-			System.out.println("stanza piena");
+			IOConsole.mostraMessaggio("stanza piena");
 	}
 
 	
