@@ -34,19 +34,18 @@ public class DiaDia {
 	private Partita partita;
 	private IOConsole IOConsole;
 
-	public DiaDia() {
+	public DiaDia(IOConsole ioconsole) {
 		this.partita = new Partita();
-		this.IOConsole= new IOConsole();
+		this.IOConsole= ioconsole;
+		
 	}
 
 	public void gioca() {
 		String istruzione; 
-		Scanner scannerDiLinee;   //prende una righa e ci fa una scansione (esempio comando "vai sud")
-
+		
 		IOConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
-		scannerDiLinee = new Scanner(System.in);		
 		do		
-			istruzione = scannerDiLinee.nextLine();
+			istruzione= this.IOConsole.leggiRiga();
 		while (!processaIstruzione(istruzione));
 	}   
 
@@ -170,7 +169,8 @@ public class DiaDia {
 	
 	
 	public static void main(String[] argc) {
-		DiaDia gioco = new DiaDia();
+		IOConsole ioconsole = new IOConsole();
+		DiaDia gioco = new DiaDia(ioconsole);
 		gioco.gioca();
 	}
 }
