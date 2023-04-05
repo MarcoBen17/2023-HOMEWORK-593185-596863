@@ -1,5 +1,6 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.*;
+import it.uniroma3.diadia.comando.*;
 import it.uniroma3.diadia.attrezzi.*;
 import it.uniroma3.diadia.giocatore.*;
 
@@ -29,7 +30,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
+	
 
 	private Partita partita;
 	private IOConsole IOConsole;
@@ -42,7 +43,6 @@ public class DiaDia {
 
 	public void gioca() {
 		String istruzione; 
-		
 		IOConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		do		
 			istruzione= this.IOConsole.leggiRiga();
@@ -87,16 +87,6 @@ public class DiaDia {
 			return false;
 	}   
 
-	// implementazioni dei comandi dell'utente:
-
-	/**
-	 * Stampa informazioni di aiuto.
-	 */
-	private void aiuto() {
-		for(int i=0; i< elencoComandi.length; i++) 
-			IOConsole.mostraMessaggio(elencoComandi[i]+" ");
-		IOConsole.mostraMessaggio("------");
-	}
 
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
