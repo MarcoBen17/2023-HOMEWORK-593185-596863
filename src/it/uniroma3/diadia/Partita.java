@@ -12,12 +12,19 @@ import it.uniroma3.diadia.giocatore.*;
 
 public class Partita {
 
-
-
 	private Stanza stanzaCorrente;
 	private Labirinto labirinto;
 	private boolean finita;
 	private Giocatore giocatore;
+	private IOConsole ioconsole;
+
+	public IOConsole getIOConsole() {
+		return ioconsole;
+	}
+
+	public void setIOConsole(IOConsole ioconsole) {
+		this.ioconsole = ioconsole;
+	}
 
 	public Giocatore getGiocatore() {
 		return giocatore;
@@ -27,7 +34,8 @@ public class Partita {
 		this.giocatore = giocatore;
 	}
 
-	public Partita(){
+	public Partita(IOConsole ioconsole){
+		this.ioconsole= ioconsole;
 		this.labirinto= new Labirinto();
 		this.stanzaCorrente= labirinto.getEntrata();
 		this.finita = false;
@@ -61,5 +69,10 @@ public class Partita {
 	 */
 	public void setFinita() {
 		this.finita = true;
+	}
+
+	public boolean giocatoreIsVivo() {
+		if (this.giocatore.getCfu() > 0) return true;
+		return false;
 	}
 }

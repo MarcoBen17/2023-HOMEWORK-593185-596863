@@ -13,7 +13,8 @@ class PartitaTest {
 	
 	@BeforeEach
 	public void setUp() {
-		this.partita= new Partita();
+		
+		this.partita= new Partita(new IOConsole());
 	}
 
 	@Test
