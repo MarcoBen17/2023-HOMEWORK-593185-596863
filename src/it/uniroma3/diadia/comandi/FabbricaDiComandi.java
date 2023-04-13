@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 public interface FabbricaDiComandi {
 	public Comando costruisciComando(String istruzione);

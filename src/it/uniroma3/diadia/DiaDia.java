@@ -1,5 +1,5 @@
 package it.uniroma3.diadia;
-import it.uniroma3.diadia.comando.*;
+import it.uniroma3.diadia.comandi.*;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -28,19 +28,19 @@ public class DiaDia {
 
 
 	private Partita partita;
-	private IOConsole ioconsole;
+	private IO io;
 
-	public DiaDia(IOConsole ioconsole) {
-		this.partita = new Partita(ioconsole);
-		this.ioconsole= ioconsole;
+	public DiaDia(IO io) {
+		this.partita = new Partita(io);
+		this.io= io;
 
 	}
 
 	public void gioca() {
 		String istruzione; 
-		ioconsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
+		this.io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		do		
-			istruzione= this.ioconsole.leggiRiga();
+			istruzione= this.io.leggiRiga();
 		while (!processaIstruzione(istruzione));
 	}   
 
@@ -58,18 +58,18 @@ public class DiaDia {
 		comandoDaEseguire.esegui(this.partita);
 
 		if (this.partita.vinta())
-			System.out.println("Hai vinto!");
+			this.io.mostraMessaggio("Hai vinto!");
 
 		if (!this.partita.giocatoreIsVivo())
-			System.out.println("Hai esaurito i CFU...");
+			this.io.mostraMessaggio("Hai esaurito i CFU...");
 
 		return this.partita.isFinita();
 	}
 
 
 	public static void main(String[] argc) {
-		IOConsole ioconsole = new IOConsole();
-		DiaDia gioco = new DiaDia(ioconsole);
+		IO io = new IOConsole();
+		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
 	}
 }

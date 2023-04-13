@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -16,20 +16,29 @@ public class ComandoPosa implements Comando{
 		if (borsa.hasAttrezzo(this.nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()< Stanza.getNumeroMassimoAttrezzi()) {
 			Attrezzo item= borsa.removeAttrezzo(this.nomeAttrezzo);
 			stanzaCorrente.addAttrezzo(item);
-			partita.getIOConsole().mostraMessaggio("attrezzo posato");
+			partita.getIO().mostraMessaggio("attrezzo posato");
 		}
 		else if (!borsa.hasAttrezzo(this.nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()>= Stanza.getNumeroMassimoAttrezzi())
-			partita.getIOConsole().mostraMessaggio("Attrezzo non presente in borsa e stanza piena");
+			partita.getIO().mostraMessaggio("Attrezzo non presente in borsa e stanza piena");
 
 		else if (!borsa.hasAttrezzo(this.nomeAttrezzo))
-			partita.getIOConsole().mostraMessaggio("Attrezzo non presente in borsa");
+			partita.getIO().mostraMessaggio("Attrezzo non presente in borsa");
 
 		else if (stanzaCorrente.getNumeroAttrezzi() >= Stanza.getNumeroMassimoAttrezzi())
-			partita.getIOConsole().mostraMessaggio("stanza piena");
+			partita.getIO().mostraMessaggio("stanza piena");
 	}
 	
 	@Override
 	public void setParametro(String parametro) {
 		this.nomeAttrezzo= parametro;
+	}
+	@Override
+	public String getNome() {
+		return "posa";
+	}
+	
+	@Override
+	public String getParametro() {
+		return this.nomeAttrezzo;
 	}
 }

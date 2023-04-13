@@ -93,10 +93,10 @@ public class Borsa {
 			for (int i= 0; i<this.numeroAttrezzi; i++) {
 				if (this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
 					a = attrezzi[i];
-					attrezzi[i]=null;
+					attrezzi[i]=attrezzi[this.numeroAttrezzi-1];
+					attrezzi[this.numeroAttrezzi-1]= null;
 				}
 			}
-			this.riordinaBorsa();
 			this.numeroAttrezzi--;
 		}
 

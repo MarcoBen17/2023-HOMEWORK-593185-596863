@@ -16,14 +16,14 @@ public class Partita {
 	private Labirinto labirinto;
 	private boolean finita;
 	private Giocatore giocatore;
-	private IOConsole ioconsole;
+	private IO io;
 
-	public IOConsole getIOConsole() {
-		return ioconsole;
+	public IO getIO() {
+		return io;
 	}
 
-	public void setIOConsole(IOConsole ioconsole) {
-		this.ioconsole = ioconsole;
+	public void setIO(IO io) {
+		this.io = io;
 	}
 
 	public Giocatore getGiocatore() {
@@ -34,8 +34,8 @@ public class Partita {
 		this.giocatore = giocatore;
 	}
 
-	public Partita(IOConsole ioconsole){
-		this.ioconsole= ioconsole;
+	public Partita(IO io){
+		this.io= io;
 		this.labirinto= new Labirinto();
 		this.stanzaCorrente= labirinto.getEntrata();
 		this.finita = false;

@@ -13,7 +13,6 @@ class PartitaTest {
 	
 	@BeforeEach
 	public void setUp() {
-		
 		this.partita= new Partita(new IOConsole());
 	}
 
@@ -29,7 +28,6 @@ class PartitaTest {
 
 	@Test
 	void testGetStanzaCorrente() {
-		
 		assertSame("Atrio", this.partita.getStanzaCorrente().getNome());
 	}
 
