@@ -15,15 +15,13 @@ class ComandoPosaTest {
 	
 	private Partita partita;
 	private Attrezzo attrezzo;
-	private FabbricaDiComandiFisarmonica factory;
 	private Comando posa;
 
 	@BeforeEach
 	public void setUp() {
 		this.partita= new Partita(new IOConsole());
 		this.attrezzo= new Attrezzo("spada", 1);
-		this.factory= new FabbricaDiComandiFisarmonica();
-		this.posa= factory.costruisciComando("posa");
+		this.posa= new ComandoPosa();
 	}
 
 	@Test

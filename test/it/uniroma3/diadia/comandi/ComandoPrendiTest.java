@@ -14,15 +14,13 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 class ComandoPrendiTest {
 	private Partita partita;
 	private Attrezzo attrezzo;
-	private FabbricaDiComandiFisarmonica factory;
 	private Comando prendi;
 
 	@BeforeEach
 	public void setUp() {
 		this.partita= new Partita(new IOConsole());
 		this.attrezzo= new Attrezzo("spada", 1);
-		this.factory= new FabbricaDiComandiFisarmonica();
-		this.prendi= factory.costruisciComando("prendi");
+		this.prendi= new ComandoPrendi();
 		this.partita.getStanzaCorrente().addAttrezzo(this.attrezzo);
 	}
 	
