@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.ComandoVai;
 
 class StanzaBloccataTest{
 
@@ -14,7 +13,7 @@ class StanzaBloccataTest{
 	private Attrezzo osso;
 	private Stanza stanzaNord;
 	private Stanza stanzaSud;
-	private ComandoVai comandoVai;
+	
 
 	@BeforeEach
 	public void setUp() {
@@ -24,13 +23,19 @@ class StanzaBloccataTest{
 		this.stanzaBloccata.impostaStanzaAdiacente("nord", this.stanzaNord);
 		this.stanzaBloccata.impostaStanzaAdiacente("sud", this.stanzaSud);
 		this.osso= new Attrezzo("osso", 1);
-		this.comandoVai= new ComandoVai();
 		
 	}
 	
 	@Test
 	void testDirezioneBloccata() {
-		
+		assertSame(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertSame(this.stanzaSud, this.stanzaBloccata.getStanzaAdiacente("sud"));
 	}
 
+	@Test 
+	void testDirezioneSbloccata() {
+		this.stanzaBloccata.addAttrezzo(this.osso);
+		assertSame(this.stanzaNord, this.stanzaBloccata.getStanzaAdiacente("nord"));
+	}
+	
 }

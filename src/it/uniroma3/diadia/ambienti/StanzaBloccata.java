@@ -18,4 +18,11 @@ public class StanzaBloccata extends Stanza {
 		else return super.getStanzaAdiacente(direzione);			
 	}
 	
+	@Override
+	public String getDescrizione() {
+		String nuovaDescrizione;
+		nuovaDescrizione=  "Stanza Bloccata!\n"+super.getDescrizione()+"\nDirezione bloccata: "+this.dirlocked+"\nAttrezzo necessario: "+this.attrezzo;
+		return nuovaDescrizione;
+	}
+	
 }
