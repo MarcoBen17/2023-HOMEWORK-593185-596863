@@ -1,4 +1,8 @@
 package it.uniroma3.diadia.ambienti;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import it.uniroma3.diadia.attrezzi.*;
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -17,8 +21,7 @@ public class Stanza {
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 
 	private String nome;
-	private Attrezzo[] attrezzi;
-	private int numeroAttrezzi;
+	private Set<Attrezzo> attrezzi;
 	private Stanza[] stanzeAdiacenti;
 	private int numeroStanzeAdiacenti;
 	private String[] direzioni;
@@ -30,10 +33,9 @@ public class Stanza {
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.numeroStanzeAdiacenti = 0;
-		this.numeroAttrezzi = 0;
 		this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI];
 		this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI];
-		this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
+		this.attrezzi = new HashSet<Attrezzo>();
 	}
 
 	/**
@@ -89,7 +91,7 @@ public class Stanza {
 	 * Restituisce la collezione di attrezzi presenti nella stanza.
 	 * @return la collezione di attrezzi nella stanza.
 	 */
-	public Attrezzo[] getAttrezzi() {
+	public Set<Attrezzo> getAttrezzi() {
 		return this.attrezzi;
 	}
 
@@ -99,9 +101,8 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
-			this.attrezzi[numeroAttrezzi] = attrezzo;
-			this.numeroAttrezzi++;
+		if (this.attrezzi.size() < NUMERO_MASSIMO_ATTREZZI) {
+			this.attrezzi.add(attrezzo);
 			return true;
 		}
 		else {
@@ -166,13 +167,12 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		if (!this.hasAttrezzo(attrezzo.getNome())) return false;
-
-		for (int i=0; i<this.numeroAttrezzi; i++) {
-			if (this.attrezzi[i].getNome().equals(attrezzo.getNome())) {
-				attrezzi[i]=attrezzi[this.numeroAttrezzi-1];
-				attrezzi[this.numeroAttrezzi-1]=null;
-				this.numeroAttrezzi--;
+		Attrezzo a=null;
+		Iterator<Attrezzo> iteratore= this.attrezzi.iterator();
+		while (iteratore.hasNext()) {
+			a= (Attrezzo) iteratore.next();
+			if (a.equals(attrezzo)) { 
+				iteratore.remove();
 				return true;
 			}
 		}
@@ -184,13 +184,6 @@ public class Stanza {
 		return NUMERO_MASSIMO_ATTREZZI;
 	}
 
-	public int getNumeroAttrezzi() {
-		return numeroAttrezzi;
-	}
-
-	public void setNumeroAttrezzi(int numeroAttrezzi) {
-		this.numeroAttrezzi = numeroAttrezzi;
-	}
 
 	public String[] getDirezioni() {
 		String[] direzioni = new String[this.numeroStanzeAdiacenti];

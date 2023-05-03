@@ -13,18 +13,18 @@ public class ComandoPosa implements Comando{
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 
-		if (borsa.hasAttrezzo(this.nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()< Stanza.getNumeroMassimoAttrezzi()) {
+		if (borsa.hasAttrezzo(this.nomeAttrezzo) && stanzaCorrente.getAttrezzi().size()< Stanza.getNumeroMassimoAttrezzi()) {
 			Attrezzo item= borsa.removeAttrezzo(this.nomeAttrezzo);
 			stanzaCorrente.addAttrezzo(item);
 			partita.getIO().mostraMessaggio("attrezzo posato");
 		}
-		else if (!borsa.hasAttrezzo(this.nomeAttrezzo) && stanzaCorrente.getNumeroAttrezzi()>= Stanza.getNumeroMassimoAttrezzi())
+		else if (!borsa.hasAttrezzo(this.nomeAttrezzo) && stanzaCorrente.getAttrezzi().size()>= Stanza.getNumeroMassimoAttrezzi())
 			partita.getIO().mostraMessaggio("Attrezzo non presente in borsa e stanza piena");
 
 		else if (!borsa.hasAttrezzo(this.nomeAttrezzo))
 			partita.getIO().mostraMessaggio("Attrezzo non presente in borsa");
 
-		else if (stanzaCorrente.getNumeroAttrezzi() >= Stanza.getNumeroMassimoAttrezzi())
+		else if (stanzaCorrente.getAttrezzi().size() >= Stanza.getNumeroMassimoAttrezzi())
 			partita.getIO().mostraMessaggio("stanza piena");
 	}
 	

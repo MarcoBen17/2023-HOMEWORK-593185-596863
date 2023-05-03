@@ -31,10 +31,10 @@ class IOSimulatorTest {
 				"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 				"Per conoscere le istruzioni usa il comando 'aiuto'.";
 		
-		String[] stampe= {messaggioDiBenvenuto ,"Aula N10", "attrezzo raccolto"};
-		
-		IOSimulator iosimulator = new IOSimulator(stampe,"vai sud", "prendi lanterna");
+		String[] stampe= {messaggioDiBenvenuto ,"Aula N10", "attrezzo raccolto", "attrezzo posato"};
+		IOSimulator iosimulator = new IOSimulator(stampe,"vai sud", "prendi lanterna", "posa lanterna");
 		diadia= new DiaDia(iosimulator);
 		diadia.gioca();
+		
 	}
 }
