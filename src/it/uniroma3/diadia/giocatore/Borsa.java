@@ -1,10 +1,14 @@
 package it.uniroma3.diadia.giocatore;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.*;
+import it.uniroma3.diadia.comparatori.ComparatoreAttrezzoPerNome;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
@@ -22,6 +26,11 @@ public class Borsa {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new ArrayList<Attrezzo>(); // speriamo bastino...
 	}
+
+	public List<Attrezzo> getAttrezzi() {
+		return this.attrezzi;
+	}
+
 
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 
@@ -84,7 +93,6 @@ public class Borsa {
 		return s.toString();
 	}
 	
-	
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		List<Attrezzo> lista= new ArrayList<Attrezzo>();
 		lista.addAll(this.attrezzi);
@@ -92,6 +100,11 @@ public class Borsa {
 		return lista;
 	}
 	
-	
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		Comparator<Attrezzo> comparatore= new ComparatoreAttrezzoPerNome();
+		SortedSet<Attrezzo> ins= new TreeSet<Attrezzo>(comparatore);
+		ins.addAll(this.attrezzi);
+		return ins;
+	}
 }
 
