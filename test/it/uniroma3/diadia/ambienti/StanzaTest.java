@@ -17,7 +17,6 @@ class StanzaTest {
 	public void setUp() {
 		
 		this.vuota= new Stanza("vuota");
-		//System.out.println("sto eseguendo il setup");
 		this.nonvuota= new Stanza("nonvuota");
 		this.osso = new Attrezzo("osso", 1);
 		this.nonvuota.addAttrezzo(this.osso);

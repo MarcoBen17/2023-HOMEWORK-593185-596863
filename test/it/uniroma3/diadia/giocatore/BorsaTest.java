@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comparatori.ComparatoreAttrezzoPerNome;
 
 class BorsaTest {
 	
@@ -70,5 +73,27 @@ class BorsaTest {
 		comp.add(new Attrezzo("appa", 3));
 		comp.add(this.osso);
 		assertEquals(lista, comp);
+	}
+	
+	@Test
+	void testSortPerNome(){
+		Attrezzo spada = new Attrezzo("spada", 1);
+		Attrezzo lanterna = new Attrezzo("lanterna", 1);
+		
+		this.borsa.addAttrezzo(lanterna);
+		this.borsa.addAttrezzo(spada);
+		
+		SortedSet<Attrezzo> ins= new TreeSet<Attrezzo>(new ComparatoreAttrezzoPerNome());
+		ins.addAll(this.borsa.getAttrezzi());
+		
+		List<Attrezzo> lins= new ArrayList<Attrezzo>();
+		lins.addAll(ins);
+		
+		List<Attrezzo> comp= new ArrayList<Attrezzo>();
+		comp.add(lanterna);
+		comp.add(this.osso);
+		comp.add(spada);
+		assertEquals(lins, comp);
+		
 	}
 }
