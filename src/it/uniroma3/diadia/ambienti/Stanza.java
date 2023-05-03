@@ -102,12 +102,11 @@ public class Stanza {
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.attrezzi.size() < NUMERO_MASSIMO_ATTREZZI) {
-			this.attrezzi.add(attrezzo);
-			return true;
+			return this.attrezzi.add(attrezzo);
 		}
-		else {
-			return false;
-		}
+		
+		return false;
+		
 	}
 
 	/**
@@ -135,7 +134,7 @@ public class Stanza {
 	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
 	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
 	 */
-	public boolean hasAttrezzo(String nomeAttrezzo) {
+	public boolean hasAttrezzo(String nomeAttrezzo) {		
 		boolean trovato;
 		trovato = false;
 		for (Attrezzo attrezzo : this.attrezzi) {
