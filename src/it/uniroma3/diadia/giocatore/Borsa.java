@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -82,5 +83,15 @@ public class Borsa {
 			s.append("Borsa vuota");
 		return s.toString();
 	}
+	
+	
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		List<Attrezzo> lista= new ArrayList<Attrezzo>();
+		lista.addAll(this.attrezzi);
+		Collections.sort(lista);
+		return lista;
+	}
+	
+	
 }
 
