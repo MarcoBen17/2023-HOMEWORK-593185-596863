@@ -35,18 +35,27 @@ public class Partita {
 	}
 
 	public Partita(IO io){
+		this(new Labirinto(), io);
+	}
+	
+	public Partita(Labirinto labirinto, IO io){
 		this.io= io;
-		this.labirinto= new Labirinto();
-		this.stanzaCorrente= labirinto.getEntrata();
+		this.labirinto= labirinto;
+		this.stanzaCorrente= labirinto.getStanzaIniziale();
 		this.finita = false;
 		this.giocatore= new Giocatore();
 	}
+
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
+
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		return this.stanzaCorrente == this.labirinto.getUscita();
+		return this.stanzaCorrente == this.labirinto.getStanzaVincente();
 	}
 
 	public Stanza getStanzaCorrente() {

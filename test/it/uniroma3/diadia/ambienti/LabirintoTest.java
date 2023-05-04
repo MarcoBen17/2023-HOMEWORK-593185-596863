@@ -18,24 +18,24 @@ class LabirintoTest {
 	}
 	@Test
 	void testGetUscita() {
-		assertSame("Biblioteca", this.labirinto.getUscita().getNome());
+		assertSame("Biblioteca", this.labirinto.getStanzaVincente().getNome());
 	}
 
 	@Test
 	void testSetUscita() {
-		this.labirinto.setUscita(this.uscita);
-		assertSame(this.uscita, this.labirinto.getUscita());
+		this.labirinto.setStanzaVincente(this.uscita);
+		assertSame(this.uscita, this.labirinto.getStanzaVincente());
 	}
 
 	@Test
 	void testGetEntrata() {
-		assertSame("Atrio", this.labirinto.getEntrata().getNome());
+		assertSame("Atrio", this.labirinto.getStanzaIniziale().getNome());
 	}
 
 	@Test
 	void testSetEntrata() {
-		this.labirinto.setEntrata(this.entrata);
-		assertSame(this.entrata, this.labirinto.getEntrata());
+		this.labirinto.setStanzaIniziale(this.entrata);
+		assertSame(this.entrata, this.labirinto.getStanzaIniziale());
 	}
 
 }
