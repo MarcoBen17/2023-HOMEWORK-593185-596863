@@ -96,4 +96,38 @@ class BorsaTest {
 		assertEquals(lins, comp);
 		
 	}
+	
+	@Test
+	void testgetSortedSetOrdinatoPerPeso() {
+		Attrezzo spada = new Attrezzo("spada", 1);
+		Attrezzo lanterna = new Attrezzo("lanterna", 1);
+		Attrezzo sasso= new Attrezzo("sasso", 1);
+		this.borsa.addAttrezzo(lanterna);
+		this.borsa.addAttrezzo(spada);
+		this.borsa.addAttrezzo(sasso);
+		
+		SortedSet<Attrezzo> insiemeOrdinato= this.borsa.getSortedSetOrdinatoPerPeso();
+		
+		List<Attrezzo> lista= new ArrayList<>();
+		lista.add(lanterna);
+		lista.add(sasso);
+		lista.add(spada);
+		lista.add(this.osso);
+		List<Attrezzo> listaDaInsieme= new ArrayList<>();
+		listaDaInsieme.addAll(insiemeOrdinato);
+		assertEquals(listaDaInsieme, lista);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 }
