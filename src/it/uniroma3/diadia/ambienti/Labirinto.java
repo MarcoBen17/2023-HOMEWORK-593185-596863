@@ -3,8 +3,8 @@ import it.uniroma3.diadia.attrezzi.*;
 
 public class Labirinto {
 
-	private Stanza uscita;
-	private Stanza entrata;
+	private Stanza stanzaVincente;
+	private Stanza stanzaIniziale;
 
 	/**
 	 * Crea tutte le stanze e le porte di collegamento
@@ -46,25 +46,29 @@ public class Labirinto {
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
 
-		uscita = biblioteca;
+		stanzaVincente = biblioteca;
 	
-		entrata = atrio;  
+		stanzaIniziale = atrio;  
+	}
+	
+	public Labirinto(Stanza stanzaIniziale) {
+		this.stanzaIniziale= stanzaIniziale;
 	}
 
-	public Stanza getUscita() {
-		return uscita;
+	public Stanza getStanzaVincente() {
+		return stanzaVincente;
 	}
 
-	public void setUscita(Stanza uscita) {
-		this.uscita = uscita;
+	public void setStanzaVincente(Stanza uscita) {
+		this.stanzaVincente = uscita;
 	}
 
-	public Stanza getEntrata() {
-		return entrata;
+	public Stanza getStanzaIniziale() {
+		return stanzaIniziale;
 	}
 
-	public void setEntrata(Stanza entrata) {
-		this.entrata = entrata;
+	public void setStanzaIniziale(Stanza entrata) {
+		this.stanzaIniziale = entrata;
 	}
 
 	

@@ -108,18 +108,8 @@ public class Borsa {
 	}
 	
 	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
-		SortedSet<Attrezzo> insieme= new TreeSet<>(this.attrezzi);		
-		return insieme;		
+		SortedSet<Attrezzo> ins = new TreeSet<Attrezzo>(this.attrezzi);
+		return ins;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
