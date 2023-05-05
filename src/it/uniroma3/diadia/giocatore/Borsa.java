@@ -2,9 +2,14 @@ package it.uniroma3.diadia.giocatore;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.*;
@@ -111,5 +116,26 @@ public class Borsa {
 		SortedSet<Attrezzo> ins = new TreeSet<Attrezzo>(this.attrezzi);
 		return ins;
 	}
+	
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		
+		Map<Integer,Set<Attrezzo>> mappa= new TreeMap<Integer,Set<Attrezzo>>();
+		
+		for (Attrezzo item: this.attrezzi) {
+			int chiave = item.getPeso();
+			if (mappa.containsKey(chiave)) {
+				mappa.get(chiave).add(item);
+			}
+			else {
+				HashSet<Attrezzo> ins = new HashSet<Attrezzo>();
+				ins.add(item);
+				mappa.put(chiave,ins);
+			}
+		}
+		return mappa;
+	}
+	
+	
+	
 }
 
