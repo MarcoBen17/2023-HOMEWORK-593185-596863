@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +25,7 @@ class BorsaTest {
 	@BeforeEach
 	public void setUp() {
 		this.borsavuota = new Borsa();
-		this.osso= new Attrezzo("osso", 3);
+		this.osso= new Attrezzo("osso", 1);
 		this.borsa= new Borsa();
 		this.borsa.addAttrezzo(this.osso);
 	}
@@ -60,8 +63,8 @@ class BorsaTest {
 		this.borsa.addAttrezzo(new Attrezzo("zappa", 2));
 		List<Attrezzo> lista= this.borsa.getContenutoOrdinatoPerPeso();
 		List<Attrezzo> comp= new ArrayList<Attrezzo>();
-		comp.add(new Attrezzo("zappa", 2));
 		comp.add(this.osso);
+		comp.add(new Attrezzo("zappa", 2));
 		assertEquals(lista, comp);
 	}
 	
@@ -70,8 +73,8 @@ class BorsaTest {
 		this.borsa.addAttrezzo(new Attrezzo("appa", 3));
 		List<Attrezzo> lista= this.borsa.getContenutoOrdinatoPerPeso();
 		List<Attrezzo> comp= new ArrayList<Attrezzo>();
-		comp.add(new Attrezzo("appa", 3));
 		comp.add(this.osso);
+		comp.add(new Attrezzo("appa", 3));
 		assertEquals(lista, comp);
 	}
 	
@@ -109,9 +112,24 @@ class BorsaTest {
 		lins.addAll(ins);
 		
 		List<Attrezzo> comp= new ArrayList<Attrezzo>();
-		comp.add(spada);
 		comp.add(this.osso);
+		comp.add(spada);
 		comp.add(lanterna);
 		assertEquals(lins, comp);
 	}
+	
+	@Test 
+	void testMappa() {
+		Attrezzo spada = new Attrezzo("spada", 1);
+		Attrezzo lanterna = new Attrezzo("lanterna", 2);
+		Attrezzo a = new Attrezzo("a", 2);
+		this.borsa.addAttrezzo(lanterna);
+		this.borsa.addAttrezzo(spada);
+		this.borsa.addAttrezzo(a);
+		
+		 Map<Integer,Set<Attrezzo>> mappa= new TreeMap<Integer, Set<Attrezzo>>();
+		mappa= this.borsa.getContenutoRaggruppatoPerPeso();
+		System.out.println(mappa);
+	}
+	
 }
