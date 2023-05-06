@@ -1,10 +1,16 @@
 package it.uniroma3.diadia.ambienti;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import it.uniroma3.diadia.attrezzi.*;
 
 public class Labirinto {
 
 	private Stanza stanzaVincente;
 	private Stanza stanzaIniziale;
+	private Map<String, Stanza> mappaStanze;
 
 	/**
 	 * Crea tutte le stanze e le porte di collegamento
@@ -16,8 +22,8 @@ public class Labirinto {
 		Attrezzo osso = new Attrezzo("osso",1);
 
 		/* crea stanze del labirinto */
-		Stanza atrio = new Stanza("Atrio");
-		Stanza aulaN11 = new StanzaMagica("Aula N11");
+		Stanza atrio = new Stanza("Atrio"); 
+		Stanza aulaN11 = new StanzaMagica("Aula N11"); 
 		Stanza aulaN10 = new Stanza("Aula N10");
 		Stanza laboratorio = new StanzaBuia("Laboratorio Campus","lanterna");
 		Stanza biblioteca = new Stanza("Biblioteca");
@@ -46,12 +52,23 @@ public class Labirinto {
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
 
+		/* setta l'entrata e l'uscita del labirinto */
 		stanzaVincente = biblioteca;
-	
 		stanzaIniziale = atrio;  
+		
+		/* aggiungo le stanze nella mappa delle stanze */
+		this.mappaStanze= new HashMap<String, Stanza>();
+		this.mappaStanze.put("Atrio", atrio);
+		this.mappaStanze.put("Aula N11", aulaN11);
+		this.mappaStanze.put("Aula N10", aulaN10);
+		this.mappaStanze.put("Mensa", mensa);
+		this.mappaStanze.put("Laboratorio Campus", laboratorio);
+		this.mappaStanze.put("Biblioteca", biblioteca);
 	}
 	
+	
 	public Labirinto(Stanza stanzaIniziale) {
+		this.mappaStanze= new HashMap<String, Stanza>();
 		this.stanzaIniziale= stanzaIniziale;
 	}
 
@@ -71,7 +88,15 @@ public class Labirinto {
 		this.stanzaIniziale = entrata;
 	}
 
+	public Stanza getStanza(String stanza) {
+		return this.mappaStanze.get(stanza);
+	}
 	
+	public Stanza putStanza(String stanza) {
+		return this.mappaStanze.put(stanza, new Stanza(stanza));
+	}
 	
-	
+	public Map<String, Stanza> getListaStanze(){
+		return this.mappaStanze;
+	}
 }

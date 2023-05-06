@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.*;
@@ -23,7 +24,7 @@ public class Stanza {
 
 	private String nome;
 	private Set<Attrezzo> attrezzi;
-	private Map<String, Stanza> stanzaAdiacenti;
+	private Map<String, Stanza> stanzeAdiacenti;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -31,7 +32,7 @@ public class Stanza {
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
-		this.stanzaAdiacenti= new HashMap<String, Stanza>();
+		this.stanzeAdiacenti= new HashMap<String, Stanza>();
 		this.attrezzi = new HashSet<Attrezzo>();
 	}
 
@@ -42,7 +43,7 @@ public class Stanza {
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		this.stanzaAdiacenti.put(direzione, stanza);
+		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class Stanza {
 	 * @param direzione
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
-		return this.stanzaAdiacenti.get(direzione);
+		return this.stanzeAdiacenti.get(direzione);
 	}
 
 	/**
@@ -100,7 +101,7 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
-		for (String direzione : this.stanzaAdiacenti.keySet())
+		for (String direzione : this.stanzeAdiacenti.keySet())
 			if (direzione!=null)
 				risultato.append(" " + direzione);
 		risultato.append("\nAttrezzi nella stanza: ");
@@ -167,7 +168,23 @@ public class Stanza {
 
 
 	public Set<String> getDirezioni() {
-		return this.stanzaAdiacenti.keySet();
+		return this.stanzeAdiacenti.keySet();
 	}
+	
+	public Map<String, Stanza> getMapStanzeAdiacenti(){
+		return this.stanzeAdiacenti;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Stanza that= (Stanza)obj;
+		return this.getNome().equals(that.getNome());
+	}
+	
 
 }
