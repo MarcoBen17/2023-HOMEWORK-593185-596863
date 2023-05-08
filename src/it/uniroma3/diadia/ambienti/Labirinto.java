@@ -16,7 +16,11 @@ public class Labirinto {
 	 * Crea tutte le stanze e le porte di collegamento
 	 */
 	public Labirinto() {
-
+		this.mappaStanze= new HashMap<String, Stanza>();
+	}
+	
+	public Labirinto creaLabirintoDefault() {
+		
 		/* crea gli attrezzi */
 		Attrezzo lanterna = new Attrezzo("lanterna",3);
 		Attrezzo osso = new Attrezzo("osso",1);
@@ -53,24 +57,11 @@ public class Labirinto {
 		atrio.addAttrezzo(osso);
 
 		/* setta l'entrata e l'uscita del labirinto */
-		stanzaVincente = biblioteca;
-		stanzaIniziale = atrio;  
-		
-		/* aggiungo le stanze nella mappa delle stanze */
-		this.mappaStanze= new HashMap<String, Stanza>();
-		this.mappaStanze.put("Atrio", atrio);
-		this.mappaStanze.put("Aula N11", aulaN11);
-		this.mappaStanze.put("Aula N10", aulaN10);
-		this.mappaStanze.put("Mensa", mensa);
-		this.mappaStanze.put("Laboratorio Campus", laboratorio);
-		this.mappaStanze.put("Biblioteca", biblioteca);
+		this.stanzaVincente = biblioteca;
+		this.stanzaIniziale = atrio;  
+		return this;
 	}
 	
-	
-	public Labirinto(Stanza stanzaIniziale) {
-		this.mappaStanze= new HashMap<String, Stanza>();
-		this.stanzaIniziale= stanzaIniziale;
-	}
 
 	public Stanza getStanzaVincente() {
 		return stanzaVincente;
@@ -92,11 +83,13 @@ public class Labirinto {
 		return this.mappaStanze.get(stanza);
 	}
 	
-	public Stanza putStanza(String stanza) {
-		return this.mappaStanze.put(stanza, new Stanza(stanza));
+	public Stanza putStanza(Stanza stanza) {
+		return this.mappaStanze.put(stanza.getNome(), stanza);
+	}
+
+	public Map<String, Stanza> getMappaStanze() {
+		return mappaStanze;
 	}
 	
-	public Map<String, Stanza> getListaStanze(){
-		return this.mappaStanze;
-	}
+	
 }

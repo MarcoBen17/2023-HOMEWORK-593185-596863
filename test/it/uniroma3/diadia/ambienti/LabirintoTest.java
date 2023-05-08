@@ -12,7 +12,7 @@ class LabirintoTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.labirinto= new Labirinto();
+		this.labirinto= new Labirinto().creaLabirintoDefault();
 		this.uscita= new Stanza("Uscita");
 		this.entrata= new Stanza("Entrata");
 	}

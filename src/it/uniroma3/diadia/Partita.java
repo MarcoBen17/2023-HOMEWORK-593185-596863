@@ -35,7 +35,7 @@ public class Partita {
 	}
 
 	public Partita(IO io){
-		this(new Labirinto(), io);
+		this(new Labirinto().creaLabirintoDefault(), io);
 	}
 	
 	public Partita(Labirinto labirinto, IO io){
