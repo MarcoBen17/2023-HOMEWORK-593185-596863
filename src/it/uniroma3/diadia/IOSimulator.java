@@ -1,36 +1,33 @@
 package it.uniroma3.diadia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IOSimulator implements IO {
 
-	private String[] comandiLetti;
-	private String[] comandiStampati;
+	private List<String> comandiLetti;
+	private List<String> comandiStampati;
 	private int indiceProxComando;
-	private int indiceProxStampa;
 
-	public IOSimulator(String[]comandistampa, String...comandiLetti){
+	public IOSimulator(List<String> comandiLetti){
 		this.comandiLetti= comandiLetti;
+		this.comandiStampati= new ArrayList<String>();
 		this.indiceProxComando=0;
-		this.indiceProxStampa=0;
-		this.comandiStampati= comandistampa;
 	}
-	
-	public IOSimulator(String...comandiletti) {
-		this(null, comandiletti);
-	}
-	
+
 	@Override
 	public void mostraMessaggio(String messaggio) {
-		if (this.comandiStampati[this.indiceProxStampa].equals(messaggio)) {
-			System.out.println(messaggio+ "    --corretto comportamento del programma");
-		}
-		else System.out.println(messaggio+ "   --comportamento anomalo del programma");
-		this.indiceProxStampa++;
+		System.out.println(messaggio);
+		this.comandiStampati.add(messaggio);
 	}
 
 	@Override
 	public String leggiRiga() {
-		
-		return this.comandiLetti[this.indiceProxComando++];
+		return this.comandiLetti.get(this.indiceProxComando++);
 	}
 
+	public List<String> getComandiStampati() {
+		return comandiStampati;
+	}
+	
 }

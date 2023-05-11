@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+
 
 class ComandoPrendiTest {
 	private Partita partita;
