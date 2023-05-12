@@ -25,7 +25,7 @@ class BorsaTest {
 	@BeforeEach
 	public void setUp() {
 		this.borsavuota = new Borsa();
-		this.osso= new Attrezzo("osso", 1);
+		this.osso= new Attrezzo("osso",1 );
 		this.borsa= new Borsa();
 		this.borsa.addAttrezzo(this.osso);
 	}
@@ -127,8 +127,10 @@ class BorsaTest {
 		this.borsa.addAttrezzo(spada);
 		this.borsa.addAttrezzo(a);
 		
-		 Map<Integer,Set<Attrezzo>> mappa= new TreeMap<Integer, Set<Attrezzo>>();
+		Map<Integer,Set<Attrezzo>> mappa= new TreeMap<Integer, Set<Attrezzo>>();
 		mappa= this.borsa.getContenutoRaggruppatoPerPeso();
+		Map<Integer,Set<Attrezzo>> mappacopia= new TreeMap<>();
+		
 		System.out.println(mappa);
 	}
 	

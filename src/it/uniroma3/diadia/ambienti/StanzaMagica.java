@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.function.BooleanSupplier;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaMagica extends Stanza {
@@ -33,5 +35,9 @@ class StanzaMagica extends Stanza {
 		nomeInvertito = nomeInvertito.reverse();
 		attrezzo = new Attrezzo(nomeInvertito.toString(),pesoX2);
 		return attrezzo;
+	}
+
+	public Boolean isMagica() {
+		return this.getClass()== StanzaMagica.class;
 	}
 }

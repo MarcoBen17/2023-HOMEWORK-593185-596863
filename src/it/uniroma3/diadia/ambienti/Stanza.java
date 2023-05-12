@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.*;
@@ -164,10 +165,27 @@ public class Stanza {
 	public static int getNumeroMassimoAttrezzi() {
 		return NUMERO_MASSIMO_ATTREZZI;
 	}
+	
+	
 
+
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Stanza that= (Stanza)obj;
+		return this.getNome().equals(that.getNome());
+	}
 
 	public Set<String> getDirezioni() {
 		return this.stanzaAdiacenti.keySet();
+	}
+
+	public Map<String, Stanza> getMapStanzeAdiacenti() {
+		return this.stanzaAdiacenti;
 	}
 
 }
