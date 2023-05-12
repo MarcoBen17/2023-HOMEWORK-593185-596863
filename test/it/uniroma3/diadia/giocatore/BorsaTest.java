@@ -105,6 +105,8 @@ class BorsaTest {
 		Attrezzo lanterna = new Attrezzo("lanterna", 4);
 		this.borsa.addAttrezzo(lanterna);
 		this.borsa.addAttrezzo(spada);
+		Attrezzo laccio = new Attrezzo("laccio", 1);
+		this.borsa.addAttrezzo(laccio);
 		
 		SortedSet<Attrezzo> ins =this.borsa.getSortedSetOrdinatoPerPeso();
 		
@@ -112,6 +114,7 @@ class BorsaTest {
 		lins.addAll(ins);
 		
 		List<Attrezzo> comp= new ArrayList<Attrezzo>();
+		comp.add(laccio);
 		comp.add(this.osso);
 		comp.add(spada);
 		comp.add(lanterna);
