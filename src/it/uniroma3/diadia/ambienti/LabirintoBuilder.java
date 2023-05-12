@@ -3,7 +3,6 @@ package it.uniroma3.diadia.ambienti;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -11,6 +10,8 @@ public class LabirintoBuilder extends Labirinto{
 	
 	private Stanza stanzaCorrente;
 	private Labirinto labirinto;
+	static final private List<String> DIREZIONI= new ArrayList<String>(List.of("nord", "sud", "est", "ovest"));
+	
 	
 	public LabirintoBuilder() {
 		this.labirinto= new Labirinto();
@@ -19,8 +20,7 @@ public class LabirintoBuilder extends Labirinto{
 	public LabirintoBuilder addStanzaIniziale(String stanzaIniziale) {
 		Stanza stanza= new Stanza(stanzaIniziale);
 		this.labirinto.setStanzaIniziale(stanza);
-		Map<String, Stanza> mappa = this.labirinto.getMappa();
-		mappa.put(stanzaIniziale,stanza);
+		this.labirinto.putStanza(stanza);
 		this.stanzaCorrente= stanza;
 		return this;
 	}
@@ -28,12 +28,10 @@ public class LabirintoBuilder extends Labirinto{
 	public LabirintoBuilder addStanzaVincente(String stanzaVincente) {
 		Stanza stanza= new Stanza(stanzaVincente);
 		this.labirinto.setStanzaVincente(stanza);
-		Map<String, Stanza> mappa = this.labirinto.getMappa();
-		mappa.put(stanzaVincente, stanza);
+		this.labirinto.putStanza(stanza);
 		this.stanzaCorrente= stanza;
 		return this;
 	}
-	
 	
 	public Labirinto getLabirinto() {
 		return this.labirinto;
@@ -44,43 +42,44 @@ public class LabirintoBuilder extends Labirinto{
 		this.stanzaCorrente.addAttrezzo(item);
 		return this;
 	}
-	public LabirintoBuilder addAdiacenza(String stanza,String adiacenza,String direzione) {
-		Stanza room1= this.labirinto.getStanza(stanza);
-		Stanza room2= this.labirinto.getStanza(adiacenza);
-		if(direzione.equals("nord") || direzione.equals("est") || direzione.equals("ovest")|| direzione.equals("sud") )
-		room1.impostaStanzaAdiacente(direzione, room2);		
-		return this;
-	}
-
-	public LabirintoBuilder addStanza(String string) {
-		Stanza stanza = new Stanza(string);
-		this.labirinto.getMappa().put(string, stanza);
-		this.stanzaCorrente=stanza;
-		return this;
-	}
-
-	public Map<String, Stanza> getListaStanze() {		
-		return this.labirinto.getMappa();
-	}
+	
 	public LabirintoBuilder addStanzaMagica(String nome, int soglia) {
-		Stanza stanzaMagica= new StanzaMagica(nome, soglia);
-		this.labirinto.getMappa().put(nome, stanzaMagica);
-		this.stanzaCorrente= stanzaMagica;
+		Stanza magica= new StanzaMagica(nome, soglia);
+		this.labirinto.putStanza(magica);
+		this.stanzaCorrente= magica;
 		return this;
 	}
+	
 	public LabirintoBuilder addStanzaBuia(String nome, String attrezzo) {
-		Stanza stanzaBuia= new StanzaBuia(nome, attrezzo);
-		this.labirinto.getMappa().put(nome, stanzaBuia);
-		this.stanzaCorrente= stanzaBuia;
-		return this;
-	}
-	public LabirintoBuilder addStanzaBloccata(String nome, String direzione, String attrezzo ) {
-		Stanza stanzaBloccata= new StanzaBloccata(nome, direzione, attrezzo);
-		this.labirinto.getMappa().put(nome, stanzaBloccata);
-		this.stanzaCorrente= stanzaBloccata;
+		Stanza buia= new StanzaBuia(nome, attrezzo);
+		this.labirinto.putStanza(buia);
+		this.stanzaCorrente= buia;
 		return this;
 	}
 	
+	public LabirintoBuilder addStanza(String stanza) {
+		Stanza room= new Stanza(stanza);
+		this.labirinto.putStanza(room);
+		this.stanzaCorrente=room;
+		return this;
+	}
 	
+	public LabirintoBuilder addStanzaBloccata(String nome, String direzione, String nomeAttrezzo) {
+		Stanza bloccata= new StanzaBloccata(nome, direzione, nomeAttrezzo);
+		this.labirinto.putStanza(bloccata);
+		this.stanzaCorrente= bloccata;
+		return this;
+	}
 	
+	public LabirintoBuilder addAdiacenza(String stanza1, String stanza2, String direzione) {
+		Stanza room1 = this.labirinto.getStanza(stanza1);
+		Stanza room2 = this.labirinto.getStanza(stanza2);
+		if (DIREZIONI.contains(direzione))
+			room1.impostaStanzaAdiacente(direzione, room2);  
+		return this;
+	}
+	
+	public Map<String, Stanza> getMappaStanze(){
+		return this.labirinto.getMappaStanze();
+	}
 }

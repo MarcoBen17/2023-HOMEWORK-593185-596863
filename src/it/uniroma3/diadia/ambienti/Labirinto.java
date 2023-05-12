@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.*;
@@ -9,24 +11,23 @@ public class Labirinto {
 	private Stanza stanzaVincente;
 	private Stanza stanzaIniziale;
 	private Map<String, Stanza> mappaStanze;
-	
 
 	/**
 	 * Crea tutte le stanze e le porte di collegamento
 	 */
 	public Labirinto() {
-		this.mappaStanze= new HashMap<>();		  
+		this.mappaStanze= new HashMap<String, Stanza>();
 	}
 	
-	
 	public Labirinto creaLabirintoDefault() {
+		
 		/* crea gli attrezzi */
 		Attrezzo lanterna = new Attrezzo("lanterna",3);
 		Attrezzo osso = new Attrezzo("osso",1);
 
 		/* crea stanze del labirinto */
-		Stanza atrio = new Stanza("Atrio");
-		Stanza aulaN11 = new StanzaMagica("Aula N11");
+		Stanza atrio = new Stanza("Atrio"); 
+		Stanza aulaN11 = new StanzaMagica("Aula N11"); 
 		Stanza aulaN10 = new Stanza("Aula N10");
 		Stanza laboratorio = new StanzaBuia("Laboratorio Campus","lanterna");
 		Stanza biblioteca = new Stanza("Biblioteca");
@@ -55,15 +56,12 @@ public class Labirinto {
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
 
+		/* setta l'entrata e l'uscita del labirinto */
 		this.stanzaVincente = biblioteca;
-	
-		this.stanzaIniziale = atrio;
+		this.stanzaIniziale = atrio;  
 		return this;
 	}
 	
-	public Labirinto(Stanza stanzaIniziale) {
-		this.stanzaIniziale= stanzaIniziale;
-	}
 
 	public Stanza getStanzaVincente() {
 		return stanzaVincente;
@@ -80,16 +78,18 @@ public class Labirinto {
 	public void setStanzaIniziale(Stanza entrata) {
 		this.stanzaIniziale = entrata;
 	}
-	
-	
-	public Stanza getStanza(String chiave) {
-		return this.mappaStanze.get(chiave);
+
+	public Stanza getStanza(String stanza) {
+		return this.mappaStanze.get(stanza);
 	}
-	public Map<String, Stanza> getMappa(){
-		return this.mappaStanze;
+	
+	public Stanza putStanza(Stanza stanza) {
+		return this.mappaStanze.put(stanza.getNome(), stanza);
 	}
 
-	
+	public Map<String, Stanza> getMappaStanze() {
+		return mappaStanze;
+	}
 	
 	
 }
