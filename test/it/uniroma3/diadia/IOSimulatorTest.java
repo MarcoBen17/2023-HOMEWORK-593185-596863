@@ -45,7 +45,6 @@ class IOSimulatorTest {
 		diadia= new DiaDia(iosimulator);
 		diadia.gioca();
 		assertEquals(stampe, iosimulator.getComandiStampati());
-		
 	}
 	
 	@Test
