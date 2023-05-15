@@ -22,11 +22,10 @@ class ComandoPosaTest {
 	private Attrezzo attrezzo;
 	private Comando posa;
 	private String nomeStanzaIniziale= "Atrio";
-	private String nomeStanzaVincente="Uscita";
+	private String nomeStanzaVincente= "Uscita";
 
 	@BeforeEach
 	public void setUp() {
-		this.partita= new Partita(new IOConsole());
 		this.attrezzo= new Attrezzo("spada", 1);
 		this.posa= new ComandoPosa();
 	}
@@ -45,22 +44,18 @@ class ComandoPosaTest {
 		this.posa.esegui(this.partita);
 		assertTrue(this.partita.getStanzaCorrente().hasAttrezzo("spada"));
 	}
-	@Test
-	void testBilocale() {		
-		Labirinto bilocale = new LabirintoBuilder()
+	
+	@Test 
+	void testComandoPosaBilocale() {
+		Labirinto lab= new LabirintoBuilder()
 				.addStanzaIniziale(this.nomeStanzaIniziale)
 				.addStanzaVincente(this.nomeStanzaVincente)
-				.addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, "nord")
-				.addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, "sud")
+				.addAdiacenza(this.nomeStanzaIniziale, this.nomeStanzaVincente, "nord")
+				.addAdiacenza(this.nomeStanzaVincente, this.nomeStanzaIniziale, "sud")
 				.getLabirinto();
-		
-		DiaDia diadia= new DiaDia(bilocale, new IOSimulator(List.of("posa spada", "vai nord")));	
+		DiaDia diadia= new DiaDia(lab,new IOSimulator(List.of("posa spada", "vai nord")));
 		diadia.getPartita().getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
-		diadia.gioca();		  
-		assertTrue(bilocale.getStanzaIniziale().hasAttrezzo("spada"));
-		
-		
-		
+		diadia.gioca();
+		assertTrue(lab.getStanza(this.nomeStanzaIniziale).hasAttrezzo("spada"));
 	}
-	
 }

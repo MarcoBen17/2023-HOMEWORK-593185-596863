@@ -9,7 +9,6 @@ public class ComandoBorsa implements Comando {
 	public void esegui(Partita partita) {
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		partita.getIO().mostraMessaggio(borsa.getContenutoOrdinatoPerPeso().toString());
-
 	}
 
 	@Override
