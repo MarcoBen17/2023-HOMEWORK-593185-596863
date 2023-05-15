@@ -27,7 +27,7 @@ public class IOSimulator implements IO {
 	}
 
 	public List<String> getComandiStampati() {
-		return comandiStampati;
+		return this.comandiStampati;
 	}
 	
 }

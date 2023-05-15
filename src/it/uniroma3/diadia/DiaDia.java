@@ -42,6 +42,9 @@ public class DiaDia {
 		this.partita = new Partita(labirinto,io);
 		this.io= io;
 	}
+	public Partita getPartita() {
+		return this.partita;
+	}
 
 	public void gioca() {
 		String istruzione; 
