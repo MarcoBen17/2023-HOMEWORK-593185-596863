@@ -23,8 +23,14 @@ public abstract class AbstractPersonaggio {
 		return this.haSalutato;
 	}
 	
-	public void saluta() {
-		StringBuilder presentazione= new StringBuilder();
+	public String saluta() {
+		StringBuilder risposta= new StringBuilder("Salve, io sono ");
+		risposta.append(this.getNome()+".");
+		if (this.haSalutato()) risposta.append("Ci siamo gia' presentati, non ricordi?");
+		
+		
+		
+		return risposta;
 		
 	}
 	
