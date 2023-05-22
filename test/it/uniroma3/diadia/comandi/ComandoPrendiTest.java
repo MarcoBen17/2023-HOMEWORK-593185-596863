@@ -21,7 +21,7 @@ class ComandoPrendiTest {
 	private Attrezzo attrezzo;
 	private String nomeStanzaIniziale= "Atrio";
 	private String nomeStanzaVincente= "Uscita";
-	private Comando prendi;
+	private AbstractComando prendi;
 
 	@BeforeEach
 	public void setUp() {

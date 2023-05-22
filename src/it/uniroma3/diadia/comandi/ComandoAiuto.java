@@ -3,7 +3,7 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.Partita;
 
 
-public class ComandoAiuto extends AbstractComando implements Comando  {
+public class ComandoAiuto extends AbstractComando {
 
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda", "borsa"};
 
@@ -18,11 +18,10 @@ public class ComandoAiuto extends AbstractComando implements Comando  {
 			partita.getIO().mostraMessaggio(elencoComandi[i]+" ");
 		partita.getIO().mostraMessaggio("------");
 	}
-	
+
 	@Override
 	public String getNome() {
 		return "aiuto";
 	}
-	
 	
 }

@@ -41,9 +41,6 @@ public class DiaDia {
 		this.partita = new Partita(labirinto,io);
 		this.io= io;
 	}
-	public Partita getPartita() {
-		return this.partita;
-	}
 
 	public void gioca() {
 		String istruzione; 
@@ -61,8 +58,8 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 
-		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiInstrospettiva();
+		AbstractComando comandoDaEseguire;
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 
@@ -76,7 +73,9 @@ public class DiaDia {
 	}
 
 
-	
+	public Partita getPartita() {
+		return partita;
+	}
 
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
