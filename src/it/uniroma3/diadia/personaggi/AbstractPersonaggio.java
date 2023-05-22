@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.personaggi;
 
+import it.uniroma3.diadia.Partita;
+
 public abstract class AbstractPersonaggio {
 
 	private String nome;
@@ -17,7 +19,7 @@ public abstract class AbstractPersonaggio {
 		return nome;
 	}
 	
-	public abstract void agisci();
+	public abstract void agisci(Partita partita);
 	
 	public boolean haSalutato() {
 		return this.haSalutato;
@@ -26,11 +28,13 @@ public abstract class AbstractPersonaggio {
 	public String saluta() {
 		StringBuilder risposta= new StringBuilder("Salve, io sono ");
 		risposta.append(this.getNome()+".");
+		
 		if (this.haSalutato()) risposta.append("Ci siamo gia' presentati, non ricordi?");
 		
+		else risposta.append(this.descrizione);
 		
-		
-		return risposta;
+		this.haSalutato=true;
+		return risposta.toString();
 		
 	}
 	
