@@ -20,7 +20,7 @@ class ComandoPosaTest {
 	
 	private Partita partita;
 	private Attrezzo attrezzo;
-	private Comando posa;
+	private AbstractComando posa;
 	private String nomeStanzaIniziale= "Atrio";
 	private String nomeStanzaVincente= "Uscita";
 

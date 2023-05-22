@@ -17,7 +17,7 @@ class FabbricaDiComandiFisarmonicaTest {
 	
 	@Test
 	void testCostruisciComandoPosa() {
-		Comando posa;
+		AbstractComando posa;
 		posa= this.factory.costruisciComando("posa osso");
 		assertEquals("posa", posa.getNome());
 		assertEquals("osso", posa.getParametro());
@@ -25,14 +25,14 @@ class FabbricaDiComandiFisarmonicaTest {
 
 	@Test
 	void testCostruisciComandoAiuto() {
-		Comando aiuto;
+		AbstractComando aiuto;
 		aiuto= this.factory.costruisciComando("aiuto");
 		assertEquals("aiuto", aiuto.getNome());
 	}
 	
 	@Test
 	void testCostruisciComandoVai() {
-		Comando vai;
+		AbstractComando vai;
 		vai= this.factory.costruisciComando("vai nord");
 		assertEquals("vai", vai.getNome());
 		assertEquals("nord", vai.getParametro());

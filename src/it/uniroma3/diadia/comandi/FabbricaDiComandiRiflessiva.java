@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
 	@Override
-	public Comando costruisciComando(String istruzione){
+	public AbstractComando costruisciComando(String istruzione){
 
 		Scanner scannerDiParole = new Scanner(istruzione); // es. ‘vai sud’
 		String nomeComando = null; // es. ‘vai’
 		String parametro = null; // es. ‘sud’
-		Comando comando = null;
+		AbstractComando comando = null;
 
 		if (scannerDiParole.hasNext())
 			nomeComando = scannerDiParole.next();//prima parola: nome del comando
@@ -22,7 +22,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			nomeclasse.append("it.uniroma3.diadia.comandi.Comando");
 			nomeclasse.append(Character.toUpperCase(nomeComando.charAt(0)));
 			nomeclasse.append(nomeComando.substring(1));
-			comando= (Comando)Class.forName(nomeclasse.toString()).newInstance();
+			comando= (AbstractComando)Class.forName(nomeclasse.toString()).newInstance();
 			comando.setParametro(parametro);
 		} catch (Exception e){
 			comando= new ComandoNonValido();
