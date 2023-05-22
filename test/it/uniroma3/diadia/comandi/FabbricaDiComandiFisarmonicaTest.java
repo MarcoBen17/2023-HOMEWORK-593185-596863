@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 class FabbricaDiComandiFisarmonicaTest {
 
-	private FabbricaDiComandiFisarmonica factory;
+	private FabbricaDiComandiInstrospettiva factory;
 
 	@BeforeEach
 	public void setUp() {
-		this.factory= new FabbricaDiComandiFisarmonica();
+		this.factory= new FabbricaDiComandiInstrospettiva();
 	}
 	
 	@Test
