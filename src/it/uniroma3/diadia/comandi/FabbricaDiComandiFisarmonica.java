@@ -6,12 +6,12 @@ import java.util.Scanner;
 public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 
 	@Override
-	public Comando costruisciComando(String istruzione) {
+	public AbstractComando costruisciComando(String istruzione) {
 
 		Scanner scannerDiParole = new Scanner(istruzione);
 		String nomeComando = null;
 		String parametro = null;
-		Comando comando = null;
+		AbstractComando comando = null;
 
 		if (scannerDiParole.hasNext())
 			nomeComando = scannerDiParole.next(); // prima parola: nome del comando
