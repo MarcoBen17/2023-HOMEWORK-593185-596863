@@ -1,41 +1,49 @@
 package it.uniroma3.diadia.personaggi;
 
-public abstract class AbstractPersonaggio {
+import it.uniroma3.diadia.Partita;
 
+public abstract class AbstractPersonaggio {
+	
 	private String nome;
 	private String descrizione;
-
-	private boolean haSalutato;
+	private Boolean haSalutato;
 	
-	public AbstractPersonaggio(String nome, String descrizione) {
-		this.nome= nome;
-		this.descrizione= descrizione;
-		this.haSalutato= false;
+	public AbstractPersonaggio(String nome, String descr) {
+		this.nome=nome;
+		this.descrizione=descr;
+		this.haSalutato=false;
 	}
 	
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
-	
-	public abstract void agisci();
 	
 	public boolean haSalutato() {
 		return this.haSalutato;
 	}
-	
-	public String saluta() {
-		StringBuilder risposta= new StringBuilder("Salve, io sono ");
-		risposta.append(this.getNome()+".");
-		if (this.haSalutato()) risposta.append("Ci siamo gia' presentati, non ricordi?");
-		
-		
-		
-		return risposta;
-		
+	public String getDescrizione() {
+		return this.descrizione;
 	}
+	public String saluta() {
+		StringBuilder ris= new StringBuilder("Ciao, io sono ");
+		ris.append(this.getNome()+".");
+		if(!haSalutato()) {
+			ris.append(this.getDescrizione());
+		}
+		else {
+			ris.append("Ci siamo già presentati!");
+		}
+		this.haSalutato=true;
+		return ris.toString();
+	}
+	abstract public String agisci(Partita partita);
 	
 	@Override
 	public String toString() {
 		return this.getNome();
 	}
+	
+	
+
+	
 }

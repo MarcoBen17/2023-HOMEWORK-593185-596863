@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.*;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
  * Una stanza e' un luogo fisico nel gioco.
@@ -25,15 +26,24 @@ public class Stanza {
 	private String nome;
 	private Set<Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
+	private AbstractPersonaggio personaggio;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
 	 * @param nome il nome della stanza
 	 */
+	public Stanza(String nome, AbstractPersonaggio pers) {
+		this.nome = nome;
+		this.stanzeAdiacenti= new HashMap<String, Stanza>();
+		this.attrezzi = new HashSet<Attrezzo>();
+		this.personaggio=pers;
+		
+	}
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.stanzeAdiacenti= new HashMap<String, Stanza>();
 		this.attrezzi = new HashSet<Attrezzo>();
+		this.personaggio=null;		
 	}
 
 	/**
@@ -184,6 +194,19 @@ public class Stanza {
 	public boolean equals(Object obj) {
 		Stanza that= (Stanza)obj;
 		return this.getNome().equals(that.getNome());
+	}
+
+	public AbstractPersonaggio getPersonaggio() {		
+		return this.personaggio;
+	}
+	
+	public Map<Stanza, Set<Attrezzo>> getMapStanzeAdiacenti_ConAttrezzi(){
+		Map<Stanza, Set<Attrezzo>>mappa= new HashMap<>();		
+		for(Stanza adiacenti: this.stanzeAdiacenti.values()) {
+			mappa.put(adiacenti, adiacenti.getAttrezzi());
+		}
+		return mappa;	
+		
 	}
 	
 
