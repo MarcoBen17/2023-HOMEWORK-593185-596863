@@ -19,9 +19,4 @@ public class ComandoAiuto extends AbstractComando {
 		partita.getIO().mostraMessaggio("------");
 	}
 
-	@Override
-	public String getNome() {
-		return "aiuto";
-	}
-	
 }

@@ -15,6 +15,5 @@ public void setParametro(String parametro) { return; }
 
 public String getParametro() {return null;}
 
-public abstract String getNome();
 }
 

@@ -10,9 +10,5 @@ public class ComandoNonValido extends AbstractComando {
 		return;
 	}
 
-	@Override
-	public String getNome() {
-		return "comandononvalido";
-	}
 	
 }

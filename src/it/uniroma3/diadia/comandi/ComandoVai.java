@@ -32,11 +32,6 @@ public class ComandoVai extends AbstractComando {
 	}
 
 	@Override
-	public String getNome() {
-		return "vai";
-	}
-
-	@Override
 	public String getParametro() {
 		return this.direzione;
 	}

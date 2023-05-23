@@ -19,7 +19,7 @@ public abstract class AbstractPersonaggio {
 		return nome;
 	}
 	
-	public abstract void agisci(Partita partita);
+	public abstract String agisci(Partita partita);
 	
 	public boolean haSalutato() {
 		return this.haSalutato;

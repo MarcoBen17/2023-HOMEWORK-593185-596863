@@ -10,9 +10,5 @@ public class ComandoGuarda extends AbstractComando {
 		return;
 	}
 
-	@Override
-	public String getNome() {
-		return "guarda";
-	}
 	
 }

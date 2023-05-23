@@ -43,10 +43,6 @@ public class ComandoPrendi extends AbstractComando{
 		this.nomeAttrezzo= parametro;
 	}
 
-	@Override
-	public String getNome() {
-		return "prendi";
-	}
 
 	@Override
 	public String getParametro() {
