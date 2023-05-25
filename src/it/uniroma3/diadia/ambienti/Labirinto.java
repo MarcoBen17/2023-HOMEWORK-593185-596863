@@ -3,6 +3,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.*;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class Labirinto {
 
@@ -53,6 +56,14 @@ public class Labirinto {
 		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
+		
+		/* Aggiungo i personaggi nelle stanze */
+		atrio.setPersonaggio(new Cane("Fido", "BAU BAU", new Attrezzo("chiave", 1)));
+		laboratorio.setPersonaggio(new Mago("Arcibald", "Sono stato mandato in questo labirinto dal rettore"
+				+ "rpova ad interagire con me magari posso esserti utile ;).", osso));
+		mensa.setPersonaggio(new Strega("Fatima", "Sono la strga più temuta di tutto l'ateneo! Ma sopratutto"
+				+ " odio i maleducati!"));
+		
 
 		/* setta l'entrata e l'uscita del labirinto */
 		this.stanzaVincente = biblioteca;

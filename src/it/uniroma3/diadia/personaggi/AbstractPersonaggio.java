@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.personaggi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public abstract class AbstractPersonaggio {
 
@@ -14,6 +15,8 @@ public abstract class AbstractPersonaggio {
 		this.descrizione= descrizione;
 		this.haSalutato= false;
 	}
+	
+	public abstract String riceviRegalo(Attrezzo attrezzo, Partita partita);
 	
 	public String getNome() {
 		return nome;

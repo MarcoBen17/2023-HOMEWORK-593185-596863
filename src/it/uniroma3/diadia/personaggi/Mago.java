@@ -11,6 +11,10 @@ public class Mago extends AbstractPersonaggio {
 	private static final String MESSAGGIO_DONO= "Ecco a te, sono certo che ne farai buon uso! \n Se non sai cosa ti ho "
 			+ "donato perchè non provi a guardare tra gli attrezzi presenti in questa stanza (;.";
 
+	private static final String MESSAGGIO_REGALO= "Accetto con piacere questo dono. Per ringraziarti della"
+			+ " tua generosità te lo restituirò con il peso dimezzato!";
+
+	
 	private Attrezzo attrezzo;
 	
 	public Mago(String nome, String descrizione, Attrezzo attrezzo) {
@@ -31,6 +35,15 @@ public class Mago extends AbstractPersonaggio {
 			msg=MESSAGGIO_DONO;
 		}
 		return msg;
+	}
+
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		int peso=attrezzo.getPeso();
+		attrezzo.setPeso(peso/2);
+		partita.getStanzaCorrente().addAttrezzo(attrezzo);
+		return MESSAGGIO_REGALO;
 	}
 
 }
