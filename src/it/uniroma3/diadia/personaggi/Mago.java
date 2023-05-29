@@ -8,7 +8,7 @@ public class Mago extends AbstractPersonaggio {
 
 	private static final String MESSAGGIO_SCUSE= "Sono spiacente, ma non ho più nulla...";
 
-	private static final String MESSAGGIO_DONO= "Ecco a te, sono certo che ne farai buon uso! \n Se non sai cosa ti ho "
+	private static final String MESSAGGIO_DONO= "Ecco a te, sono certo che ne farai buon uso! \nSe non sai cosa ti ho "
 			+ "donato perchè non provi a guardare tra gli attrezzi presenti in questa stanza (;.";
 
 	private static final String MESSAGGIO_REGALO= "Accetto con piacere questo dono. Per ringraziarti della"
