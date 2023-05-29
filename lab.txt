@@ -1,4 +1,4 @@
-Stanze: biblioteca, N10, N11
+Stanze: N10, N11, biblioteca
 Inizio: N10
 Vincente: N11
 Attrezzi: martello 10 biblioteca, pinza 2 N10

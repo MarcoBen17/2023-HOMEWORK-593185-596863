@@ -7,9 +7,10 @@ public class IOConsole implements IO {
 		System.out.println(msg);
 	}
 	public String leggiRiga() {
-		Scanner scannerDiLinee = new Scanner(System.in);
-		String riga = scannerDiLinee.nextLine();
+		try (Scanner scannerDiLinee = new Scanner(System.in)) {
+			String riga = scannerDiLinee.nextLine();
 //		scannerDiLinee.close();
-		return riga;
+			return riga;
+		}
 	}
 }
