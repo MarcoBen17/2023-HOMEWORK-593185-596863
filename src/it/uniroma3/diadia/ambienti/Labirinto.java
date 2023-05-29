@@ -1,4 +1,5 @@
 package it.uniroma3.diadia.ambienti;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,13 @@ public class Labirinto {
 	 */
 	public Labirinto() {
 		this.mappaStanze= new HashMap<String, Stanza>();
+	}
+	
+	public Labirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
+		CaricatoreLabirinto c= new CaricatoreLabirinto(nomeFile);
+		c.carica();
+		this.stanzaIniziale= c.getStanzaIniziale();
+		this.stanzaVincente= c.getStanzaVincente();
 	}
 	
 	public Labirinto creaLabirintoDefault() {
@@ -60,8 +68,8 @@ public class Labirinto {
 		/* Aggiungo i personaggi nelle stanze */
 		atrio.setPersonaggio(new Cane("Fido", "BAU BAU", new Attrezzo("chiave", 1)));
 		laboratorio.setPersonaggio(new Mago("Arcibald", "Sono stato mandato in questo labirinto dal rettore"
-				+ "rpova ad interagire con me magari posso esserti utile ;).", osso));
-		mensa.setPersonaggio(new Strega("Fatima", "Sono la strga più temuta di tutto l'ateneo! Ma sopratutto"
+				+ "prova ad interagire con me magari posso esserti utile ;).", osso));
+		mensa.setPersonaggio(new Strega("Fatima", "Sono la strega più temuta di tutto l'ateneo! Ma sopratutto"
 				+ " odio i maleducati!"));
 		
 

@@ -17,6 +17,10 @@ public class LabirintoBuilder extends Labirinto{
 		this.labirinto= new Labirinto();
 	}
 	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.stanzaCorrente = stanzaCorrente;
+	}
+
 	public LabirintoBuilder addStanzaIniziale(String stanzaIniziale) {
 		Stanza stanza= new Stanza(stanzaIniziale);
 		this.labirinto.setStanzaIniziale(stanza);
@@ -71,9 +75,9 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 	
-	public LabirintoBuilder addAdiacenza(String stanza1, String stanza2, String direzione) {
-		Stanza room1 = this.labirinto.getStanza(stanza1);
-		Stanza room2 = this.labirinto.getStanza(stanza2);
+	public LabirintoBuilder addAdiacenza(String stanzaPartenza, String stanzaDestinazione, String direzione) {
+		Stanza room1 = this.labirinto.getStanza(stanzaPartenza);
+		Stanza room2 = this.labirinto.getStanza(stanzaDestinazione);
 		if (DIREZIONI.contains(direzione))
 			room1.impostaStanzaAdiacente(direzione, room2);  
 		return this;
