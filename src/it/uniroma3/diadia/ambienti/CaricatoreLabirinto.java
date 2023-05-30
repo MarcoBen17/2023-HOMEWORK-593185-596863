@@ -21,6 +21,11 @@ public class CaricatoreLabirinto {
 	/* prefisso della riga contenente le specifiche dei collegamenti tra stanza nel formato <nomeStanzaDa> <direzione> <nomeStanzaA> */
 	private static final String USCITE_MARKER = "Uscite:";
 
+	/*prefisso della riga contenente le specifiche dei personaggi*/
+	private static final String MAGO_MARKER = "Mago:";
+	private static final String STREGA_MARKER = "Strega:";
+	private static final String CANE_MARKER = "Cane:";
+	
 	/*
 	 *  Esempio di un possibile file di specifica di un labirinto (vedi POO-26-eccezioni-file.pdf)
 
@@ -47,6 +52,9 @@ public class CaricatoreLabirinto {
 			this.leggiInizialeEvincente();
 			this.leggiECollocaAttrezzi();
 			this.leggiEImpostaUscite();
+			this.leggiECollocaMago();
+			this.leggiECollocaStrega();
+			this.leggiECollocaCane();
 		} finally {
 			try {
 				reader.close();
@@ -175,4 +183,89 @@ public class CaricatoreLabirinto {
 	public Stanza getStanzaVincente() {
 		return this.labirinto.getStanzaVincente();
 	}
+	
+	
+	
+	private void leggiECollocaMago() throws FormatoFileNonValidoException {
+		String specifichePersonaggi = this.leggiRigaCheCominciaPer(MAGO_MARKER);
+
+		for(String specificaPersonaggio : this.separaStringheAlleVirgole(specifichePersonaggi)) {
+			String nome=null;
+			String nomeAttrezzo=null;
+			String pesoAttrezzo= null;
+			String nomeStanza= null;
+			try (Scanner scannerDiLinea = new Scanner(specificaPersonaggio)) {
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome del personaggio "));
+				nome = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome dell'attrezzo"));
+				nomeAttrezzo = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il peso dell'attrezzo "+nomeAttrezzo+"."));
+				pesoAttrezzo = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome della stanza"));
+				nomeStanza= scannerDiLinea.next();
+			}
+			this.aggiungiMago(nome, nomeAttrezzo, pesoAttrezzo, nomeStanza);
+		} 
+	}
+	
+	private void leggiECollocaStrega() throws FormatoFileNonValidoException {
+		String specifichePersonaggi = this.leggiRigaCheCominciaPer(STREGA_MARKER);
+		
+		for(String specificaPersonaggio : this.separaStringheAlleVirgole(specifichePersonaggi)) {
+			String nome=null;
+			String nomeStanza= null;
+			try (Scanner scannerDiLinea = new Scanner(specificaPersonaggio)) {
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome del personaggio "));
+				nome = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome della stanza"));
+				nomeStanza= scannerDiLinea.next();
+			}
+			this.aggiungiStrega(nome, nomeStanza);
+		} 
+	}
+	
+	private void leggiECollocaCane() throws FormatoFileNonValidoException {
+		String specifichePersonaggi = this.leggiRigaCheCominciaPer(CANE_MARKER);
+
+		for(String specificaPersonaggio : this.separaStringheAlleVirgole(specifichePersonaggi)) {
+			String nome=null;
+			String nomeAttrezzo=null;
+			String pesoAttrezzo= null;
+			String nomeStanza= null;
+			try (Scanner scannerDiLinea = new Scanner(specificaPersonaggio)) {
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome del personaggio "));
+				nome = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome dell'attrezzo"));
+				nomeAttrezzo = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il peso dell'attrezzo "+nomeAttrezzo+"."));
+				pesoAttrezzo = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("il nome della stanza"));
+				nomeStanza= scannerDiLinea.next();
+			}
+			this.aggiungiMago(nome, nomeAttrezzo, pesoAttrezzo, nomeStanza);
+		} 
+	}
+	
+	private void aggiungiMago(String nome, String nomeAttrezzo, String pesoAttrezzo, String nomeStanza) throws FormatoFileNonValidoException {
+		int peso;
+		check(this.isStanzaValida(nomeStanza),"Stanza non valida");
+		peso = Integer.parseInt(pesoAttrezzo);
+		this.labirinto.setStanzaCorrente(this.labirinto.getMappaStanze().get(nomeStanza));
+		this.labirinto.addMago(nome, "AbraCadabra!", nomeAttrezzo, peso);
+	}
+	
+	private void aggiungiStrega(String nome, String nomeStanza) throws FormatoFileNonValidoException {
+		check(this.isStanzaValida(nomeStanza),"Stanza non valida");
+		this.labirinto.setStanzaCorrente(this.labirinto.getMappaStanze().get(nomeStanza));
+		this.labirinto.addStrega(nome, "EHEHEHEH sono malvagia!!");
+	}
+	
+	public void aggiungiCane(String nome, String nomeAttrezzo, String pesoAttrezzo, String nomeStanza) throws FormatoFileNonValidoException {
+		int peso;
+		check(this.isStanzaValida(nomeStanza),"Stanza non valida");
+		peso = Integer.parseInt(pesoAttrezzo);
+		this.labirinto.setStanzaCorrente(this.labirinto.getMappaStanze().get(nomeStanza));
+		this.labirinto.addCane(nome, "BAUBAU!", nomeAttrezzo, peso);
+	}
+
 }

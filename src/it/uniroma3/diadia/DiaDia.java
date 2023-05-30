@@ -83,7 +83,7 @@ public class DiaDia {
 	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
 		IO io = new IOConsole();
 		Labirinto lab= new Labirinto("lab.txt");
-		DiaDia gioco = new DiaDia(io);
+		DiaDia gioco = new DiaDia(lab,io);
 		gioco.gioca();
 	}
 }

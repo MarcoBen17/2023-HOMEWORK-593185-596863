@@ -5,22 +5,79 @@ import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class LabirintoBuilder extends Labirinto{
 	
 	private Stanza stanzaCorrente;
+	
+
 	private Labirinto labirinto;
 	static final private List<String> DIREZIONI= new ArrayList<String>(List.of("nord", "sud", "est", "ovest"));
 	
-	
-	public LabirintoBuilder() {
-		this.labirinto= new Labirinto();
+	public Stanza getStanzaCorrente() {
+		return stanzaCorrente;
 	}
 	
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
 		this.stanzaCorrente = stanzaCorrente;
 	}
-
+	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
+	
+	public LabirintoBuilder() {
+		this.labirinto= new Labirinto();
+	}
+	
+	public Labirinto getLabirinto() {
+		return this.labirinto;
+	}
+	
+	public LabirintoBuilder addAttrezzo(String nome, int peso) {
+		Attrezzo item= new Attrezzo(nome, peso);
+		this.stanzaCorrente.addAttrezzo(item);
+		return this;
+	}
+	
+	
+	//-------------------------Funzioni per inserire i personaggi--------------------------------------//
+	
+	
+	public LabirintoBuilder addMago(String nome, String descrizione, String nomeAttrezzo, int peso) {
+		Attrezzo att= new Attrezzo(nomeAttrezzo, peso);
+		AbstractPersonaggio mago= new Mago(nome, descrizione, att);
+		this.stanzaCorrente.setPersonaggio(mago);
+		return this;
+	}
+	
+	public LabirintoBuilder addStrega(String nome, String descrizione) {
+		AbstractPersonaggio strega= new Strega(nome, descrizione);
+		this.stanzaCorrente.setPersonaggio(strega);
+		return this;
+	}
+	
+	public LabirintoBuilder addCane(String nome, String descrizione, String nomeAttrezzo, int peso) {
+		Attrezzo att= new Attrezzo(nomeAttrezzo, peso);
+		AbstractPersonaggio cane= new Cane(nome, descrizione, att);
+		this.stanzaCorrente.setPersonaggio(cane);
+		return this;
+	}
+	
+	
+	//-------------------------Funzioni per la creazione delle stanze-----------------------------------//
+	
+	public LabirintoBuilder addStanza(String stanza) {
+		Stanza room= new Stanza(stanza);
+		this.labirinto.putStanza(room);
+		this.stanzaCorrente=room;
+		return this;
+	}
+	
 	public LabirintoBuilder addStanzaIniziale(String stanzaIniziale) {
 		Stanza stanza= new Stanza(stanzaIniziale);
 		this.labirinto.setStanzaIniziale(stanza);
@@ -37,13 +94,10 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 	
-	public Labirinto getLabirinto() {
-		return this.labirinto;
-	}
-	
-	public LabirintoBuilder addAttrezzo(String nome, int peso) {
-		Attrezzo item= new Attrezzo(nome, peso);
-		this.stanzaCorrente.addAttrezzo(item);
+	public LabirintoBuilder addStanzaBloccata(String nome, String direzione, String nomeAttrezzo) {
+		Stanza bloccata= new StanzaBloccata(nome, direzione, nomeAttrezzo);
+		this.labirinto.putStanza(bloccata);
+		this.stanzaCorrente= bloccata;
 		return this;
 	}
 	
@@ -61,23 +115,9 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 	
-	public LabirintoBuilder addStanza(String stanza) {
-		Stanza room= new Stanza(stanza);
-		this.labirinto.putStanza(room);
-		this.stanzaCorrente=room;
-		return this;
-	}
-	
-	public LabirintoBuilder addStanzaBloccata(String nome, String direzione, String nomeAttrezzo) {
-		Stanza bloccata= new StanzaBloccata(nome, direzione, nomeAttrezzo);
-		this.labirinto.putStanza(bloccata);
-		this.stanzaCorrente= bloccata;
-		return this;
-	}
-	
-	public LabirintoBuilder addAdiacenza(String stanzaPartenza, String stanzaDestinazione, String direzione) {
-		Stanza room1 = this.labirinto.getStanza(stanzaPartenza);
-		Stanza room2 = this.labirinto.getStanza(stanzaDestinazione);
+	public LabirintoBuilder addAdiacenza(String stanza1, String stanza2, String direzione) {
+		Stanza room1 = this.labirinto.getStanza(stanza1);
+		Stanza room2 = this.labirinto.getStanza(stanza2);
 		if (DIREZIONI.contains(direzione))
 			room1.impostaStanzaAdiacente(direzione, room2);  
 		return this;
