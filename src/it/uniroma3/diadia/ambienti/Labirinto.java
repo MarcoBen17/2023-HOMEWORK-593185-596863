@@ -23,7 +23,7 @@ public class Labirinto {
 	
 	public Labirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
 		CaricatoreLabirinto c= new CaricatoreLabirinto(nomeFile);
-		this.mappaStanze= c.carica();
+		c.carica();
 		this.stanzaIniziale= c.getStanzaIniziale();
 		this.stanzaVincente= c.getStanzaVincente();
 	}
@@ -80,8 +80,9 @@ public class Labirinto {
 	}
 	
 
+
 	public Stanza getStanzaVincente() {
-		return stanzaVincente;
+		return this.stanzaVincente;
 	}
 
 	public void setStanzaVincente(Stanza uscita) {
@@ -89,7 +90,7 @@ public class Labirinto {
 	}
 
 	public Stanza getStanzaIniziale() {
-		return stanzaIniziale;
+		return this.stanzaIniziale;
 	}
 
 	public void setStanzaIniziale(Stanza entrata) {
@@ -105,7 +106,7 @@ public class Labirinto {
 	}
 
 	public Map<String, Stanza> getMappaStanze() {
-		return mappaStanze;
+		return this.mappaStanze;
 	}
 	
 	

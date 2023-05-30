@@ -3,7 +3,6 @@ package it.uniroma3.diadia.ambienti;
 import java.io.*;
 import java.util.*;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class CaricatoreLabirinto {
 
@@ -42,7 +41,7 @@ public class CaricatoreLabirinto {
 		this.labirinto= new LabirintoBuilder();
 	}
 
-	public Map<String, Stanza> carica() throws FormatoFileNonValidoException {
+	public void carica() throws FormatoFileNonValidoException {
 		try {
 			this.leggiECreaStanze();
 			this.leggiInizialeEvincente();
@@ -56,7 +55,6 @@ public class CaricatoreLabirinto {
 				throw new RuntimeException(e);
 			}
 		}
-		return this.labirinto.getLabirinto().getMappaStanze();
 	}
 
 	private String leggiRigaCheCominciaPer(String marker) throws FormatoFileNonValidoException {
@@ -73,7 +71,7 @@ public class CaricatoreLabirinto {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
 		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
 			this.labirinto.addStanza(nomeStanza);
-		} 
+		}
 	}
 
 	private List<String> separaStringheAlleVirgole(String string) {
@@ -87,21 +85,22 @@ public class CaricatoreLabirinto {
 		return result;
 	}
 
-
 	private void leggiInizialeEvincente() throws FormatoFileNonValidoException {
 		String nomeStanzaIniziale = null;
 		nomeStanzaIniziale = this.leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
 		check(this.isStanzaValida(nomeStanzaIniziale), nomeStanzaIniziale +" non definita");
 		String nomeStanzaVincente = this.leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER);
 		check(this.isStanzaValida(nomeStanzaVincente), nomeStanzaVincente + " non definita");
-
-		this.labirinto.addStanzaVincente(nomeStanzaVincente).addStanzaIniziale(nomeStanzaIniziale);
+		
+		this.labirinto.setStanzaVincente(this.labirinto.getMappaStanze().get(nomeStanzaVincente));
+		this.labirinto.setStanzaIniziale(this.labirinto.getMappaStanze().get(nomeStanzaIniziale));
+		
 	}
 
 	private void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
 		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_MARKER);
 
-		for(String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
+		for(String specificaAttrezzo : this.separaStringheAlleVirgole(specificheAttrezzi)) {
 			String nomeAttrezzo = null;
 			String pesoAttrezzo = null;
 			String nomeStanza = null; 
@@ -121,15 +120,14 @@ public class CaricatoreLabirinto {
 		int peso;
 		try {
 			peso = Integer.parseInt(pesoAttrezzo);
-			check(isStanzaValida(nomeStanza),"Attrezzo "+ nomeAttrezzo+" non collocabile: stanza " +nomeStanza+" inesistente");
-			this.labirinto.setStanzaCorrente(this.labirinto.getStanza(nomeStanza));
+			check(this.isStanzaValida(nomeStanza),"Attrezzo "+ nomeAttrezzo+" non collocabile: stanza " +nomeStanza+" inesistente");
+			this.labirinto.setStanzaCorrente(this.labirinto.getMappaStanze().get(nomeStanza));
 			this.labirinto.addAttrezzo(nomeAttrezzo, peso);
 		}
 		catch (NumberFormatException e) {
 			check(false, "Peso attrezzo "+nomeAttrezzo+" non valido");
 		}
 	}
-
 
 	private boolean isStanzaValida(String nomeStanza) {
 		return this.labirinto.getMappaStanze().containsKey(nomeStanza);
@@ -138,7 +136,7 @@ public class CaricatoreLabirinto {
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
 		String specificheUscite = this.leggiRigaCheCominciaPer(USCITE_MARKER);
 
-		for(String specificaUscita : separaStringheAlleVirgole(specificheUscite)) {
+		for(String specificaUscita : this.separaStringheAlleVirgole(specificheUscite)) {
 			String stanzaPartenza=null;
 			String dir=null;
 			String stanzaDestinazione= null;
@@ -150,7 +148,7 @@ public class CaricatoreLabirinto {
 				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la destinazione di una uscita della stanza "+stanzaPartenza+" nella direzione "+dir));
 				stanzaDestinazione = scannerDiLinea.next();
 			}
-			impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
+			this.impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
 		} 
 	}
 
@@ -159,8 +157,8 @@ public class CaricatoreLabirinto {
 	}
 
 	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
-		check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
-		check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
+		check(this.isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
+		check(this.isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
 		this.labirinto.addAdiacenza(stanzaDa, nomeA, dir);
 	}
 
