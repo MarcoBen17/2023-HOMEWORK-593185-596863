@@ -1,4 +1,5 @@
 package it.uniroma3.diadia.ambienti;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,12 +10,19 @@ public class Labirinto {
 	private Stanza stanzaVincente;
 	private Stanza stanzaIniziale;
 	private Map<String, Stanza> mappaStanze;
+	private Labirinto lab;
 
 	/**
 	 * Crea tutte le stanze e le porte di collegamento
 	 */
 	public Labirinto() {
 		this.mappaStanze= new HashMap<String, Stanza>();
+	}
+	public Labirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
+		CaricatoreLabirinto c= new CaricatoreLabirinto(nomeFile);
+		c.carica();			
+		this.stanzaIniziale=c.getStanzaIniziale();
+		this.stanzaVincente=c.getStanzaVincente();
 	}
 	
 	public Labirinto creaLabirintoDefault() {
@@ -86,7 +94,7 @@ public class Labirinto {
 	}
 
 	public Map<String, Stanza> getMappaStanze() {
-		return mappaStanze;
+		return this.mappaStanze;
 	}
 	
 	

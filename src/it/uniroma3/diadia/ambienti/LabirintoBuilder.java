@@ -9,9 +9,22 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class LabirintoBuilder extends Labirinto{
 	
 	private Stanza stanzaCorrente;
+	
+
 	private Labirinto labirinto;
 	static final private List<String> DIREZIONI= new ArrayList<String>(List.of("nord", "sud", "est", "ovest"));
 	
+	public Stanza getStanzaCorrente() {
+		return stanzaCorrente;
+	}
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.stanzaCorrente = stanzaCorrente;
+	}
+	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
 	
 	public LabirintoBuilder() {
 		this.labirinto= new Labirinto();
@@ -56,6 +69,7 @@ public class LabirintoBuilder extends Labirinto{
 		this.stanzaCorrente= buia;
 		return this;
 	}
+	
 	
 	public LabirintoBuilder addStanza(String stanza) {
 		Stanza room= new Stanza(stanza);

@@ -1,4 +1,8 @@
 package it.uniroma3.diadia;
+import java.io.FileNotFoundException;
+
+import it.uniroma3.diadia.ambienti.CaricatoreLabirinto;
+import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.*;
 
@@ -30,17 +34,20 @@ public class DiaDia {
 
 	private Partita partita;
 	private IO io;
+	
 
 	public DiaDia(IO io) {
 		this.partita = new Partita(io);
 		this.io= io;
-
+		
 	}
 
 	public DiaDia(Labirinto labirinto, IO io) {
 		this.partita = new Partita(labirinto,io);
 		this.io= io;
+		
 	}
+	
 
 	public void gioca() {
 		String istruzione; 
@@ -76,10 +83,14 @@ public class DiaDia {
 	public Partita getPartita() {
 		return partita;
 	}
+	
 
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
 		IO io = new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		CaricatoreLabirinto labirinto2= new CaricatoreLabirinto("labirinto1.txt");
+		Labirinto lab= new Labirinto();
+		lab=labirinto2.carica();
+		DiaDia gioco = new DiaDia(lab,io);
 		gioco.gioca();
 	}
 }
