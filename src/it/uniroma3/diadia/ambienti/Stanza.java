@@ -46,6 +46,9 @@ public class Stanza {
 		this.personaggio=null;		
 	}
 
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
 	/**
 	 * Imposta una stanza adiacente.
 	 *

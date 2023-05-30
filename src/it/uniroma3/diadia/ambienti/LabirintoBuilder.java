@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Mago;
 
 public class LabirintoBuilder extends Labirinto{
 	
@@ -70,6 +72,12 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 	
+	public LabirintoBuilder addMago(String nome, String descrizione, String nomeAttrezzo, int peso) {
+		Attrezzo att= new Attrezzo(nomeAttrezzo, peso);
+		AbstractPersonaggio mago= new Mago(nome, descrizione, att);
+		this.stanzaCorrente.setPersonaggio(mago);
+		return this;
+	}
 	
 	public LabirintoBuilder addStanza(String stanza) {
 		Stanza room= new Stanza(stanza);
