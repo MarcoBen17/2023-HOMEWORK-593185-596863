@@ -1,0 +1,11 @@
+Stanze:N10,N11
+Stanze_Buie:N10 lanterna
+Stanze_Bloccate:
+Stanze_Magiche:
+Inizio:N10
+Vincente:N11
+Attrezzi:
+Mago:
+Strega:
+Cane:
+Uscite:

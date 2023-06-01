@@ -40,15 +40,17 @@ public class CaricatoreLabirinto {
 
 	 */
 	private LineNumberReader reader;
-
 	private LabirintoBuilder labirinto;
-
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
 		this.reader = new LineNumberReader(new FileReader(nomeFile));
 		this.labirinto= new LabirintoBuilder();
 	}
 
+	public LabirintoBuilder getLabirinto() {
+		return this.labirinto;
+	}
+	
 	public void carica() throws FormatoFileNonValidoException {
 		try {
 			this.leggiECreaStanze();
