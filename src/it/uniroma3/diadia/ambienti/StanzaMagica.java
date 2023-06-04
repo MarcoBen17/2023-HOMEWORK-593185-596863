@@ -1,7 +1,5 @@
 package it.uniroma3.diadia.ambienti;
 
-import java.util.function.BooleanSupplier;
-
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaMagica extends Stanza {

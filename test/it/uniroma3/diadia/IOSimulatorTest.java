@@ -8,8 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
-
 class IOSimulatorTest {
 	
 	static final private String MESSAGGIO_BENVENUTO = ""+
@@ -50,7 +48,7 @@ class IOSimulatorTest {
 	@Test
 	void testPartitaConLabirintoSimulatoStanzaBloccata() {
 		DiaDia diadia;
-		Labirinto lab= new LabirintoBuilder()
+		Labirinto lab= new Labirinto.LabirintoBuilder()
 				.addStanzaIniziale(nomeStanzaIniziale).addAttrezzo("chiave", 1)
 				.addStanzaBloccata("stanza bloccata", "nord", "chiave")
 				.addAdiacenza(nomeStanzaIniziale, "stanza bloccata", "nord")

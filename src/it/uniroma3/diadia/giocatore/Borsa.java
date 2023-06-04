@@ -2,7 +2,6 @@ package it.uniroma3.diadia.giocatore;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +15,19 @@ import it.uniroma3.diadia.attrezzi.*;
 import it.uniroma3.diadia.comparatori.ComparatoreAttrezzoPerNome;
 
 public class Borsa {
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	
+//	private static int getProperties(String key) throws IOException {
+//		key= "peso_max_borsa";
+//		String file_path= "diadia.properties.txt";
+//		FileInputStream ip= new FileInputStream(file_path);
+//		Properties costanti= new Properties();
+//		costanti.load(ip);
+//		int valore= Integer.parseInt(costanti.getProperty("peso_max_borsa"));
+//		return valore;
+//	}
+	
+	public final static int DEFAULT_PESO_MAX_BORSA =10;
+	
 	private List<Attrezzo> attrezzi;
 	private int pesoMax;
 

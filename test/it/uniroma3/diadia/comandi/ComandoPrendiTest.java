@@ -3,6 +3,7 @@ package it.uniroma3.diadia.comandi;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
@@ -25,7 +25,7 @@ class ComandoPrendiTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.partita= new Partita(new IOConsole());
+		this.partita= new Partita(new IOConsole(new Scanner(System.in)));
 		this.attrezzo= new Attrezzo("spada", 1);
 		this.prendi= new ComandoPrendi();
 		this.partita.getStanzaCorrente().addAttrezzo(this.attrezzo);
@@ -46,7 +46,7 @@ class ComandoPrendiTest {
 	
 	@Test 
 	void testComandoPrendiBilocale() {
-		Labirinto lab= new LabirintoBuilder()
+		Labirinto lab= new Labirinto.LabirintoBuilder()
 				.addStanzaIniziale(this.nomeStanzaIniziale).addAttrezzo("spada", 1).addAttrezzo("lancia", 10)
 				.addStanzaVincente(this.nomeStanzaVincente)
 				.addAdiacenza(this.nomeStanzaIniziale, this.nomeStanzaVincente, "nord")

@@ -34,6 +34,7 @@ public class Cane extends AbstractPersonaggio {
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 		if (attrezzo.getNome().equals(CIBO_PREFERITO)) {
 			partita.getStanzaCorrente().addAttrezzo(this.attrezzo);
+			this.attrezzo=null;
 			return VERSO;
 		}
 		else return this.agisci(partita);

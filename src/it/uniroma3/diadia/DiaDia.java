@@ -1,5 +1,6 @@
 package it.uniroma3.diadia;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
 import it.uniroma3.diadia.ambienti.Labirinto;
@@ -81,9 +82,11 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
-		IO io = new IOConsole();
+		Scanner scannerDiLinee = new Scanner(System.in);
+		IO io = new IOConsole(scannerDiLinee);
 		Labirinto lab= new Labirinto("lab.txt");
 		DiaDia gioco = new DiaDia(lab,io);
 		gioco.gioca();
+		scannerDiLinee.close();
 	}
 }

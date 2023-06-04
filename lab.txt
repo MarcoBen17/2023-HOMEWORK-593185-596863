@@ -1,7 +1,7 @@
 Stanze:N10,N11
 Stanze_Buie:laboratorio pinza
 Stanze_Bloccate:biblioteca nord lancia
-Stanze_Magiche:
+Stanze_Magiche:Campus 
 Inizio:N10
 Vincente:N11
 Attrezzi:martello 10 biblioteca,pinza 2 N10
