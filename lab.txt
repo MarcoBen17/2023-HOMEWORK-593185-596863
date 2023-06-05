@@ -8,4 +8,4 @@ Attrezzi:martello 10 biblioteca,pinza 2 N10
 Mago:Arcibald lancia 1 biblioteca
 Strega:Fatima N10
 Cane:
-Uscite:biblioteca nord N10,biblioteca sud N11,N10 sud biblioteca ,biblioteca est laboratorio
+Uscite:biblioteca nord N10,biblioteca sud N11,biblioteca est laboratorio
