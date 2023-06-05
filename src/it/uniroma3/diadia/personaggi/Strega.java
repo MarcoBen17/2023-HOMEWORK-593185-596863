@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.personaggi;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,37 +22,32 @@ public class Strega extends AbstractPersonaggio {
 	@Override
 	public String agisci(Partita partita) {
 		String msg="Oh no sei stato teletrasportato, ma chissà dove...";
-		Stanza daMandare=null;
-		int contatore=0;
-		if(!this.haSalutato()) {
-			Map<Stanza, Set<Attrezzo>> mapStanzeAdiacenti_ConAttrezzi = partita.getStanzaCorrente().getMapStanzeAdiacenti_ConAttrezzi();
-			for(Stanza adiacente: mapStanzeAdiacenti_ConAttrezzi.keySet()) {
-				if(mapStanzeAdiacenti_ConAttrezzi.get(adiacente).size()>contatore) {
-					contatore=mapStanzeAdiacenti_ConAttrezzi.get(adiacente).size();
-					daMandare=adiacente;
-				}
+		Stanza daMandare=null;		
+		class ComparatoreStanzePerAttrezzi implements Comparator<Stanza>{
+
+			@Override
+			public int compare(Stanza o1, Stanza o2) {
+				return o1.getAttrezzi().size()-o2.getAttrezzi().size();
 			}
 			
 		}
+		List<Stanza> listaStanze = new ArrayList<>(partita.getStanzaCorrente().getMapStanzeAdiacenti().values());
+		listaStanze.sort(new ComparatoreStanzePerAttrezzi());
+		if(!this.haSalutato()) {
+			daMandare=listaStanze.get(0);						
+		}
 		else {
-			Map<Stanza, Set<Attrezzo>> mapStanzeAdiacenti_ConAttrezzi = partita.getStanzaCorrente().getMapStanzeAdiacenti_ConAttrezzi();
-			List<String> direzioni=new ArrayList<>();
-			direzioni.addAll(partita.getStanzaCorrente().getDirezioni());
-			contatore=partita.getStanzaCorrente().getStanzaAdiacente(direzioni.get(0)).getAttrezzi().size();
-			for(Stanza adiacente: mapStanzeAdiacenti_ConAttrezzi.keySet()) {
-				if(mapStanzeAdiacenti_ConAttrezzi.get(adiacente).size()<contatore) {
-					contatore=mapStanzeAdiacenti_ConAttrezzi.get(adiacente).size();
-					daMandare=adiacente;
-				}
-			}
-					
-				
+			daMandare=listaStanze.get(listaStanze.size()-1);				
 		}
 		if(daMandare!=null) partita.setStanzaCorrente(daMandare);
 		else {
 			msg="Sei stato fortunato, non ci sono state adiacenti";
-		}
-		
+		}		
 		return msg;
+	}
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		return "Stolto avventuriero speravi di farmi addolcire forse? hihihihhihi";
 	}
 }

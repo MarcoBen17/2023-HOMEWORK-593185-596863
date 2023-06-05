@@ -35,4 +35,12 @@ public class Mago extends AbstractPersonaggio {
 		return msg;
 	}
 
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		attrezzo.setPeso(attrezzo.getPeso()/2);
+		partita.getStanzaCorrente().addAttrezzo(attrezzo);
+		return "Grazie infinite mio prode avventuriero! Per ricompensarti della tua gentilezza guarda nella stanza...";
+	}
+
 }

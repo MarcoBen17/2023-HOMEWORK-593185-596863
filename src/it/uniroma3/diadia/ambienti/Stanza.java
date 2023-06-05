@@ -46,6 +46,10 @@ public class Stanza {
 		this.personaggio=null;		
 	}
 
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	
 	/**
 	 * Imposta una stanza adiacente.
 	 *
@@ -120,6 +124,9 @@ public class Stanza {
 				risultato.append(attrezzo.toString()+" ");
 			}
 		}
+		risultato.append("\nPersonaggio nella stanza: ");
+		if(this.personaggio!=null) risultato.append(this.personaggio.getNome());
+		else risultato.append("Nessun personaggio presente nella stanza");
 		return risultato.toString();
 	}
 
