@@ -15,19 +15,23 @@ import it.uniroma3.diadia.attrezzi.*;
 import it.uniroma3.diadia.comparatori.ComparatoreAttrezzoPerNome;
 
 public class Borsa {
-	
-//	private static int getProperties(String key) throws IOException {
-//		key= "peso_max_borsa";
+
+//	private static int getProperties(String key) {
+//		int valore=0;
 //		String file_path= "diadia.properties.txt";
-//		FileInputStream ip= new FileInputStream(file_path);
+//		try { FileInputStream ip= new FileInputStream(file_path);
 //		Properties costanti= new Properties();
 //		costanti.load(ip);
-//		int valore= Integer.parseInt(costanti.getProperty("peso_max_borsa"));
+//		valore= Integer.parseInt(costanti.getProperty(key));
+//
+//		} catch (Exception e) {
+//			System.out.println("errori in fase di lettura delle properties");
+//		}
 //		return valore;
 //	}
-	
-	public final static int DEFAULT_PESO_MAX_BORSA =10;
-	
+
+	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+
 	private List<Attrezzo> attrezzi;
 	private int pesoMax;
 
@@ -108,30 +112,30 @@ public class Borsa {
 			s.append("Borsa vuota");
 		return s.toString();
 	}
-	
+
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		List<Attrezzo> lista= new ArrayList<Attrezzo>();
 		lista.addAll(this.attrezzi);
 		Collections.sort(lista);
 		return lista;
 	}
-	
+
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
 		Comparator<Attrezzo> comparatore= new ComparatoreAttrezzoPerNome();
 		SortedSet<Attrezzo> ins= new TreeSet<Attrezzo>(comparatore);
 		ins.addAll(this.attrezzi);
 		return ins;
 	}
-	
+
 	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
 		SortedSet<Attrezzo> ins = new TreeSet<Attrezzo>(this.attrezzi);
 		return ins;
 	}
-	
+
 	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
-		
+
 		Map<Integer,Set<Attrezzo>> mappa= new TreeMap<Integer,Set<Attrezzo>>();
-		
+
 		for (Attrezzo item: this.attrezzi) {
 			int chiave = item.getPeso();
 			if (mappa.containsKey(chiave)) {
@@ -145,8 +149,8 @@ public class Borsa {
 		}
 		return mappa;
 	}
-	
-	
-	
+
+
+
 }
 
