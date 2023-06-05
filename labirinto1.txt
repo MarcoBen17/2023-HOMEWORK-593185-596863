@@ -6,6 +6,6 @@ Mago:
 Strega:Strega biblioteca
 Cane:
 Attrezzi:martello 10 biblioteca,pinza 2 N10
-Uscite:biblioteca nord N10,biblioteca sud N11,N10 sud biblioteca
-Inizio:N10
+Uscite:biblioteca nord N10,biblioteca sud N11
+Inizio:biblioteca
 Vincente:N11

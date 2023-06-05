@@ -37,25 +37,25 @@ public class Labirinto {
 		Stanza aulaN10 = new Stanza("Aula N10");
 		Stanza laboratorio = new StanzaBuia("Laboratorio Campus","lanterna");
 		Stanza biblioteca = new Stanza("Biblioteca");
-		Stanza mensa= new StanzaBloccata("Mensa", "est", "osso");
+		Stanza mensa= new StanzaBloccata("Mensa", Direzioni.est, "osso");
 
 		/* collega le stanze */
-		atrio.impostaStanzaAdiacente("nord", biblioteca);
-		atrio.impostaStanzaAdiacente("est", aulaN11);
-		atrio.impostaStanzaAdiacente("sud", aulaN10);
-		atrio.impostaStanzaAdiacente("ovest", laboratorio);
-		aulaN11.impostaStanzaAdiacente("est", laboratorio);
-		aulaN11.impostaStanzaAdiacente("ovest", atrio);
-		aulaN10.impostaStanzaAdiacente("nord", atrio);
-		aulaN10.impostaStanzaAdiacente("est", aulaN11);
-		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
-		laboratorio.impostaStanzaAdiacente("est", atrio);
-		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
-		laboratorio.impostaStanzaAdiacente("nord", mensa);
-		biblioteca.impostaStanzaAdiacente("sud", atrio);
-		biblioteca.impostaStanzaAdiacente("ovest", mensa);
-		mensa.impostaStanzaAdiacente("sud", laboratorio);
-		mensa.impostaStanzaAdiacente("est", biblioteca);
+		atrio.impostaStanzaAdiacente(Direzioni.nord, biblioteca);
+		atrio.impostaStanzaAdiacente(Direzioni.est, aulaN11);
+		atrio.impostaStanzaAdiacente(Direzioni.sud, aulaN10);
+		atrio.impostaStanzaAdiacente(Direzioni.ovest, laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzioni.est, laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzioni.ovest, atrio);
+		aulaN10.impostaStanzaAdiacente(Direzioni.nord, atrio);
+		aulaN10.impostaStanzaAdiacente(Direzioni.est, aulaN11);
+		aulaN10.impostaStanzaAdiacente(Direzioni.ovest, laboratorio);
+		laboratorio.impostaStanzaAdiacente(Direzioni.est, atrio);
+		laboratorio.impostaStanzaAdiacente(Direzioni.ovest, aulaN11);
+		laboratorio.impostaStanzaAdiacente(Direzioni.nord, mensa);
+		biblioteca.impostaStanzaAdiacente(Direzioni.sud, atrio);
+		biblioteca.impostaStanzaAdiacente(Direzioni.ovest, mensa);
+		mensa.impostaStanzaAdiacente(Direzioni.sud, laboratorio);
+		mensa.impostaStanzaAdiacente(Direzioni.est, biblioteca);
 		
 
 		/* pone gli attrezzi nelle stanze */

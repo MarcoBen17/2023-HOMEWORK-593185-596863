@@ -17,25 +17,25 @@ class StanzaBloccataTest{
 
 	@BeforeEach
 	public void setUp() {
-		this.stanzaBloccata= new StanzaBloccata("N11", "nord", "osso");
+		this.stanzaBloccata= new StanzaBloccata("N11", Direzioni.nord, "osso");
 		this.stanzaNord= new Stanza("N10");
 		this.stanzaSud= new Stanza("N12");
-		this.stanzaBloccata.impostaStanzaAdiacente("nord", this.stanzaNord);
-		this.stanzaBloccata.impostaStanzaAdiacente("sud", this.stanzaSud);
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzioni.nord, this.stanzaNord);
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzioni.sud, this.stanzaSud);
 		this.osso= new Attrezzo("osso", 1);
 		
 	}
 	
 	@Test
 	void testDirezioneBloccata() {
-		assertSame(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
-		assertSame(this.stanzaSud, this.stanzaBloccata.getStanzaAdiacente("sud"));
+		assertSame(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente(Direzioni.nord));
+		assertSame(this.stanzaSud, this.stanzaBloccata.getStanzaAdiacente(Direzioni.sud));
 	}
 
 	@Test 
 	void testDirezioneSbloccata() {
 		this.stanzaBloccata.addAttrezzo(this.osso);
-		assertSame(this.stanzaNord, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertSame(this.stanzaNord, this.stanzaBloccata.getStanzaAdiacente(Direzioni.nord));
 	}
 	
 }

@@ -90,7 +90,7 @@ public class LabirintoBuilder extends Labirinto{
 	}
 	
 	public LabirintoBuilder addStanzaBloccata(String nome, String direzione, String nomeAttrezzo) {
-		Stanza bloccata= new StanzaBloccata(nome, direzione, nomeAttrezzo);
+		Stanza bloccata= new StanzaBloccata(nome, Direzioni.valueOf(direzione), nomeAttrezzo);
 		this.labirinto.putStanza(bloccata);
 		this.stanzaCorrente= bloccata;
 		return this;
@@ -100,7 +100,8 @@ public class LabirintoBuilder extends Labirinto{
 		Stanza room1 = this.labirinto.getStanza(stanza1);
 		Stanza room2 = this.labirinto.getStanza(stanza2);
 		if (DIREZIONI.contains(direzione))
-			room1.impostaStanzaAdiacente(direzione, room2);  
+			room1.impostaStanzaAdiacente(Direzioni.valueOf(direzione), room2); 
+			room2.impostaStanzaAdiacente(Direzioni.valueOf(direzione).opposta(), room1);
 		return this;
 	}
 	
