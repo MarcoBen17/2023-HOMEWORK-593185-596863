@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 class ComandoVaiTest {
@@ -20,7 +19,7 @@ class ComandoVaiTest {
 	
 	@Test
 	void testEseguiBilocale() {
-		Labirinto lab= new LabirintoBuilder()
+		Labirinto lab= new Labirinto.LabirintoBuilder()
 				.addStanzaIniziale(this.nomeStanzaIniziale)
 				.addStanzaVincente(this.nomeStanzaVincente)
 				.addAdiacenza(this.nomeStanzaIniziale, this.nomeStanzaVincente, "nord")

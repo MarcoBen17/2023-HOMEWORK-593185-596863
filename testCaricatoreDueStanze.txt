@@ -1,0 +1,11 @@
+Stanze:N10,N11
+Stanze_Buie:
+Stanze_Bloccate:
+Stanze_Magiche:
+Inizio:N10
+Vincente:N11
+Attrezzi:spada 2 N10
+Mago:Arcibald chiavistello 3 N10
+Strega:
+Cane:
+Uscite:

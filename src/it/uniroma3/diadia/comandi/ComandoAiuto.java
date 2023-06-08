@@ -5,7 +5,8 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoAiuto extends AbstractComando {
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda", "borsa"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda", "borsa", "saluta",
+			"interagisci", "regala"};
 
 	// implementazioni dei comandi dell'utente:
 
@@ -19,9 +20,4 @@ public class ComandoAiuto extends AbstractComando {
 		partita.getIO().mostraMessaggio("------");
 	}
 
-	@Override
-	public String getNome() {
-		return "aiuto";
-	}
-	
 }

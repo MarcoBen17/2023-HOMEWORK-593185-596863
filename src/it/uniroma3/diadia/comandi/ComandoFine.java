@@ -10,9 +10,4 @@ public class ComandoFine extends AbstractComando{
 		partita.setFinita();
 	}
 
-	@Override
-	public String getNome() {
-		return "fine";
-	}
-	
 }

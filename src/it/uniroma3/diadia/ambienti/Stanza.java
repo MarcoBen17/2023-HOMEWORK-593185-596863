@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.*;
@@ -25,37 +24,35 @@ public class Stanza {
 
 	private String nome;
 	private Set<Attrezzo> attrezzi;
-	private Map<String, Stanza> stanzeAdiacenti;
+	private Map<Direzione, Stanza> stanzeAdiacenti;
 	private AbstractPersonaggio personaggio;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
 	 * @param nome il nome della stanza
 	 */
+	public Stanza(String nome) {
+		this(nome, null);
+	}
+	
 	public Stanza(String nome, AbstractPersonaggio pers) {
 		this.nome = nome;
-		this.stanzeAdiacenti= new HashMap<String, Stanza>();
+		this.stanzeAdiacenti= new HashMap<Direzione, Stanza>();
 		this.attrezzi = new HashSet<Attrezzo>();
-		this.personaggio=pers;
-		
+		this.personaggio= pers; 
 	}
-	public Stanza(String nome) {
-		this.nome = nome;
-		this.stanzeAdiacenti= new HashMap<String, Stanza>();
-		this.attrezzi = new HashSet<Attrezzo>();
-		this.personaggio=null;		
+	
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio=personaggio;
 	}
 
-	public void setPersonaggio(AbstractPersonaggio personaggio) {
-		this.personaggio = personaggio;
-	}
 	/**
 	 * Imposta una stanza adiacente.
 	 *
 	 * @param direzione direzione in cui sara' posta la stanza adiacente.
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+	public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
 		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
@@ -63,7 +60,7 @@ public class Stanza {
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -91,6 +88,10 @@ public class Stanza {
 		return this.attrezzi;
 	}
 
+	public AbstractPersonaggio getPersonaggio() {
+		return personaggio;
+	}
+
 	/**
 	 * Mette un attrezzo nella stanza.
 	 * @param attrezzo l'attrezzo da mettere nella stanza.
@@ -114,7 +115,7 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
-		for (String direzione : this.stanzeAdiacenti.keySet())
+		for (Direzione direzione : this.stanzeAdiacenti.keySet())
 			if (direzione!=null)
 				risultato.append(" " + direzione);
 		risultato.append("\nAttrezzi nella stanza: ");
@@ -180,11 +181,11 @@ public class Stanza {
 	}
 
 
-	public Set<String> getDirezioni() {
+	public Set<Direzione> getDirezioni() {
 		return this.stanzeAdiacenti.keySet();
 	}
 	
-	public Map<String, Stanza> getMapStanzeAdiacenti(){
+	public Map<Direzione, Stanza> getMapStanzeAdiacenti(){
 		return this.stanzeAdiacenti;
 	}
 
@@ -197,19 +198,6 @@ public class Stanza {
 	public boolean equals(Object obj) {
 		Stanza that= (Stanza)obj;
 		return this.getNome().equals(that.getNome());
-	}
-
-	public AbstractPersonaggio getPersonaggio() {		
-		return this.personaggio;
-	}
-	
-	public Map<Stanza, Set<Attrezzo>> getMapStanzeAdiacenti_ConAttrezzi(){
-		Map<Stanza, Set<Attrezzo>>mappa= new HashMap<>();		
-		for(Stanza adiacenti: this.stanzeAdiacenti.values()) {
-			mappa.put(adiacenti, adiacenti.getAttrezzi());
-		}
-		return mappa;	
-		
 	}
 	
 

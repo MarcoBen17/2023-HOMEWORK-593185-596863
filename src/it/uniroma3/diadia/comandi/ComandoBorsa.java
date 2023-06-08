@@ -12,9 +12,5 @@ public class ComandoBorsa extends AbstractComando {
 
 	}
 
-	@Override
-	public String getNome() {
-		return "borsa";
-	}
 
 }

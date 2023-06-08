@@ -3,36 +3,47 @@ package it.uniroma3.diadia.personaggi;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class Mago extends AbstractPersonaggio {	
-	
-	private Attrezzo attrezzoDaregalare;
-	
-	private static final String MESSAGGIO_DONO = "Sei un vero simpaticone, " +
-			"con una mia magica azione, troverai un nuovo oggetto nella stanza" +
-			"per il tuo borsone!";
-	
-	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla...";
-	
-	
+public class Mago extends AbstractPersonaggio {
 
-	public Mago(String nome, String descr, Attrezzo att) {
-		super(nome, descr);	
-		this.attrezzoDaregalare=att;
+
+	private static final String MESSAGGIO_SCUSE= "Sono spiacente, ma non ho più nulla...";
+
+	private static final String MESSAGGIO_DONO= "Ecco a te, sono certo che ne farai buon uso! \nSe non sai cosa ti ho "
+			+ "donato perchè non provi a guardare tra gli attrezzi presenti in questa stanza (;.";
+
+	private static final String MESSAGGIO_REGALO= "Accetto con piacere questo dono. Per ringraziarti della"
+			+ " tua generosità te lo restituirò con il peso dimezzato!";
+
+	
+	private Attrezzo attrezzo;
+	
+	public Mago(String nome, String descrizione, Attrezzo attrezzo) {
+		super(nome, descrizione);
+		this.attrezzo= attrezzo;
 	}
-	
-	
+
+
 	@Override
 	public String agisci(Partita partita) {
 		String msg;
-		if(this.attrezzoDaregalare!=null) {
-			partita.getStanzaCorrente().addAttrezzo(attrezzoDaregalare);
-			this.attrezzoDaregalare=null;
-			msg=MESSAGGIO_DONO;
-		}
-		else {
+		if (this.attrezzo==null) {
 			msg=MESSAGGIO_SCUSE;
 		}
+		else {
+			partita.getStanzaCorrente().addAttrezzo(this.attrezzo);
+			this.attrezzo=null;
+			msg=MESSAGGIO_DONO;
+		}
 		return msg;
+	}
+
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		int peso=attrezzo.getPeso();
+		attrezzo.setPeso(peso/2);
+		partita.getStanzaCorrente().addAttrezzo(attrezzo);
+		return MESSAGGIO_REGALO;
 	}
 
 }
